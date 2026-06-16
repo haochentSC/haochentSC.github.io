@@ -1,0 +1,73 @@
+<!-- @dsCard group="Type" -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0e14; --surface: #0d1117; --surface2: #11161f;
+        --border: #1f2630; --border-strong: #2d3748;
+        --text: #c9d1d9; --muted: #8b949e; --faint: #6e7681;
+        --accent: #3fb950; --accent-dim: #238636; --cyan: #56d4dd;
+      }
+      body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+      .mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+  </head>
+  <body class="p-10">
+    <h1 class="mono text-2xl font-bold" style="color: var(--accent)">// design tokens</h1>
+    <p class="mono mt-1 text-sm" style="color: var(--muted)">terminal / AI-infra aesthetic</p>
+
+    <h2 class="mono mt-8 text-sm font-bold" style="color: var(--cyan)">color</h2>
+    <div class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <!-- swatches -->
+      <div class="rounded border p-3" style="border-color: var(--border)">
+        <div class="h-12 rounded" style="background: #0a0e14"></div>
+        <p class="mono mt-2 text-xs" style="color: var(--muted)">bg · #0a0e14</p>
+      </div>
+      <div class="rounded border p-3" style="border-color: var(--border)">
+        <div class="h-12 rounded" style="background: #0d1117"></div>
+        <p class="mono mt-2 text-xs" style="color: var(--muted)">surface · #0d1117</p>
+      </div>
+      <div class="rounded border p-3" style="border-color: var(--border)">
+        <div class="h-12 rounded" style="background: #1f2630"></div>
+        <p class="mono mt-2 text-xs" style="color: var(--muted)">border · #1f2630</p>
+      </div>
+      <div class="rounded border p-3" style="border-color: var(--border)">
+        <div class="h-12 rounded" style="background: #c9d1d9"></div>
+        <p class="mono mt-2 text-xs" style="color: var(--muted)">text · #c9d1d9</p>
+      </div>
+      <div class="rounded border p-3" style="border-color: var(--border)">
+        <div class="h-12 rounded" style="background: #8b949e"></div>
+        <p class="mono mt-2 text-xs" style="color: var(--muted)">muted · #8b949e</p>
+      </div>
+      <div class="rounded border p-3" style="border-color: var(--border)">
+        <div class="h-12 rounded" style="background: #3fb950"></div>
+        <p class="mono mt-2 text-xs" style="color: var(--muted)">accent · #3fb950</p>
+      </div>
+      <div class="rounded border p-3" style="border-color: var(--border)">
+        <div class="h-12 rounded" style="background: #238636"></div>
+        <p class="mono mt-2 text-xs" style="color: var(--muted)">accent-dim · #238636</p>
+      </div>
+      <div class="rounded border p-3" style="border-color: var(--border)">
+        <div class="h-12 rounded" style="background: #56d4dd"></div>
+        <p class="mono mt-2 text-xs" style="color: var(--muted)">cyan · #56d4dd</p>
+      </div>
+    </div>
+
+    <h2 class="mono mt-8 text-sm font-bold" style="color: var(--cyan)">type scale</h2>
+    <div class="mt-3 space-y-2">
+      <p class="mono text-5xl font-bold">Haochen Tong</p>
+      <p class="mono text-2xl font-bold" style="color: var(--cyan)">systems &amp; AI-infra engineer</p>
+      <p class="text-lg" style="color: var(--muted)">Body copy — Inter, generous line height, muted gray.</p>
+      <p class="mono text-sm" style="color: var(--accent)">// section label — mono, accent green</p>
+      <p class="mono text-xs" style="color: var(--faint)">caption / chip — mono, faint</p>
+    </div>
+  </body>
+</html>

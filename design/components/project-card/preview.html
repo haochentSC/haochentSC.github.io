@@ -1,0 +1,79 @@
+<!-- @dsCard group="Components" -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0e14; --surface: #0d1117; --surface2: #11161f; --border: #1f2630;
+        --text: #c9d1d9; --muted: #8b949e; --faint: #6e7681; --accent: #3fb950;
+      }
+      body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+      .mono { font-family: 'JetBrains Mono', monospace; }
+      .card { transition: all 0.2s; }
+      .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    </style>
+  </head>
+  <body class="p-10">
+    <p class="mono text-sm" style="color: var(--accent)">// selected work</p>
+    <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Card 1 -->
+      <a href="#" class="card flex flex-col rounded-lg border p-5" style="border-color: var(--border); background: var(--surface)">
+        <div class="flex items-start justify-between gap-3">
+          <h3 class="mono text-base font-bold">Distributed KV Cache</h3>
+          <span class="mono text-xs" style="color: var(--faint)">distributed-systems</span>
+        </div>
+        <p class="mt-2 flex-1 text-sm leading-relaxed" style="color: var(--muted)">
+          Prefix-sharing cache for multi-node vLLM serving on a live GPU cluster.
+        </p>
+        <p class="mono mt-3 text-sm"><span class="font-bold" style="color: var(--accent)">−10.9%</span><span style="color: var(--faint)"> TTFT @ 4k tokens</span></p>
+        <ul class="mt-4 flex flex-wrap gap-1.5 mono text-xs" style="color: var(--muted)">
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">Go</li>
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">gRPC</li>
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">etcd</li>
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">vLLM</li>
+        </ul>
+      </a>
+      <!-- Card 2 -->
+      <a href="#" class="card flex flex-col rounded-lg border p-5" style="border-color: var(--border); background: var(--surface)">
+        <div class="flex items-start justify-between gap-3">
+          <h3 class="mono text-base font-bold">Modality-Aware KV Tiering</h3>
+          <span class="mono text-xs" style="color: var(--faint)">ai-infra</span>
+        </div>
+        <p class="mt-2 flex-1 text-sm leading-relaxed" style="color: var(--muted)">
+          Vision-language RAG inference — hybrid retrieval + query rewriting through vLLM.
+        </p>
+        <p class="mono mt-3 text-sm"><span class="font-bold" style="color: var(--accent)">BM25 + dense</span><span style="color: var(--faint)"> RRF fusion</span></p>
+        <ul class="mt-4 flex flex-wrap gap-1.5 mono text-xs" style="color: var(--muted)">
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">PyTorch</li>
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">vLLM</li>
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">CLIP</li>
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">BM25</li>
+        </ul>
+      </a>
+      <!-- Card 3 -->
+      <a href="#" class="card flex flex-col rounded-lg border p-5" style="border-color: var(--border); background: var(--surface)">
+        <div class="flex items-start justify-between gap-3">
+          <h3 class="mono text-base font-bold">AgentVeris</h3>
+          <span class="mono text-xs" style="color: var(--faint)">fullstack</span>
+        </div>
+        <p class="mt-2 flex-1 text-sm leading-relaxed" style="color: var(--muted)">
+          Live SaaS scanning e-commerce sites for AI shopping-agent readiness.
+        </p>
+        <p class="mono mt-3 text-sm"><span class="font-bold" style="color: var(--accent)">30+</span><span style="color: var(--faint)"> checks · 6 categories</span></p>
+        <ul class="mt-4 flex flex-wrap gap-1.5 mono text-xs" style="color: var(--muted)">
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">FastAPI</li>
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">Celery</li>
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">Next.js</li>
+          <li class="rounded px-2 py-0.5" style="background: var(--surface2)">MCP</li>
+        </ul>
+      </a>
+    </div>
+  </body>
+</html>

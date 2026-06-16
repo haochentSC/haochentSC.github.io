@@ -1,0 +1,51 @@
+---
+import MetricBadge from './MetricBadge.astro';
+
+const links = {
+  github: 'https://github.com/haochentSC',
+  linkedin: 'https://linkedin.com/in/haochent',
+  email: 'mailto:tonghaochen77@gmail.com',
+};
+---
+
+<section class="grid-bg relative border-b border-[var(--color-border)]">
+  <div class="mx-auto max-w-5xl px-6 py-24 sm:py-32">
+    <p class="font-mono text-sm text-[var(--color-accent)]">&gt; whoami</p>
+    <h1 class="mt-4 font-mono text-4xl font-bold tracking-tight text-[var(--color-text)] sm:text-6xl">
+      Haochen Tong
+    </h1>
+    <p class="mt-4 max-w-2xl font-mono text-lg text-[var(--color-cyan)] sm:text-xl">
+      systems &amp; AI-infra engineer
+      <span class="text-[var(--color-muted)]">· MCS @ UIUC</span>
+    </p>
+    <p class="mt-6 max-w-2xl text-base leading-relaxed text-[var(--color-muted)] sm:text-lg">
+      Building LLM inference systems, distributed KV caches, and multimodal RAG —
+      from custom vLLM connectors and consistent-hashing shard placement to live,
+      production SaaS.<span class="cursor"></span>
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <MetricBadge value="−10.9%" label="TTFT @ 4k tokens" />
+      <MetricBadge value="0" label="correctness violations / 10k+ req" />
+      <MetricBadge value="30+" label="compliance checks shipped" />
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-4 font-mono text-sm">
+      <a
+        href={links.github}
+        class="rounded border border-[var(--color-border-strong)] px-4 py-2 text-[var(--color-text)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+        >github</a
+      >
+      <a
+        href={links.linkedin}
+        class="rounded border border-[var(--color-border-strong)] px-4 py-2 text-[var(--color-text)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+        >linkedin</a
+      >
+      <a
+        href={links.email}
+        class="rounded border border-[var(--color-border-strong)] px-4 py-2 text-[var(--color-text)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+        >email</a
+      >
+    </div>
+  </div>
+</section>

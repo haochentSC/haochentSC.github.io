@@ -1,0 +1,34 @@
+---
+// Experience section. Content sourced from the master resume (strongest bullets only).
+const bullets = [
+  'Shipped a Flask Blueprint with REST endpoints for single-user and batch email digest dispatch — SendGrid dynamic templates, PostgreSQL JSONB recommendation queries, and Redis-backed idempotency powering a production email pipeline.',
+  'Built a recommendation enrichment layer joining cached JSONB recommendations with batch event lookups via PostgreSQL array queries, enabling 100-user batch sends per request.',
+  'Engineered debounced auto-save with optimistic UI and sync conflict resolution — cut draft-loss by 90%, save-failure rate to <0.5%, and perceived latency by ~200 ms.',
+  'Containerized backend services with Docker, cutting new-developer onboarding to <15 minutes.',
+];
+---
+
+<section id="experience" class="border-b border-[var(--color-border)]">
+  <div class="mx-auto max-w-5xl px-6 py-20">
+    <p class="section-label">// experience</p>
+    <div class="mt-8 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <h3 class="font-mono text-lg font-bold text-[var(--color-text)]">
+          Software Engineering Intern
+          <span class="text-[var(--color-accent)]">@ Stringer News</span>
+        </h3>
+        <span class="font-mono text-sm text-[var(--color-muted)]">Aug 2025 – Dec 2025 · Los Angeles, CA</span>
+      </div>
+      <ul class="mt-5 space-y-3">
+        {
+          bullets.map((b) => (
+            <li class="flex gap-3 text-sm leading-relaxed text-[var(--color-muted)]">
+              <span class="mt-1 shrink-0 font-mono text-[var(--color-accent)]">▸</span>
+              <span set:html={b} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import ExperienceItem from '../components/ExperienceItem.astro';
+import SkillGrid from '../components/SkillGrid.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base>
+  <Nav onHome={true} />
+  <main>
+    <Hero />
+    <ProjectGrid />
+    <ExperienceItem />
+    <SkillGrid />
+    <Footer />
+  </main>
+</Base>

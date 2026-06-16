@@ -1,11 +1,39 @@
 @import 'tailwindcss';
 
 /* ------------------------------------------------------------------ *
- * Design tokens — terminal / AI-infra aesthetic.
- * These map to Tailwind v4 utilities (bg-bg, text-accent, font-mono, …)
- * and are the source of truth mirrored by the Claude Design library.
+ * Fonts live in @theme so the font-mono / font-sans utilities resolve.
  * ------------------------------------------------------------------ */
 @theme {
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, 'SFMono-Regular',
+    'Cascadia Code', Consolas, monospace;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* ------------------------------------------------------------------ *
+ * Design tokens — terminal / AI-infra aesthetic.
+ * Light is the default; dark is opt-in via <html data-theme="dark">.
+ * Components reference these as var(--color-*) (incl. arbitrary
+ * Tailwind values like text-[var(--color-text)]), so switching the
+ * variables re-themes the whole site with no class changes.
+ * ------------------------------------------------------------------ */
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #f6f8fa;
+  --color-surface-2: #eaeef2;
+  --color-border: #d0d7de;
+  --color-border-strong: #afb8c1;
+  --color-text: #1f2328;
+  --color-muted: #57606a;
+  --color-faint: #818b98;
+  --color-accent: #1a7f37;
+  --color-accent-dim: #116329;
+  --color-cyan: #0a7ea4;
+
+  --grid-line: rgba(26, 127, 55, 0.06);
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
   --color-bg: #0a0e14;
   --color-surface: #0d1117;
   --color-surface-2: #11161f;
@@ -18,9 +46,8 @@
   --color-accent-dim: #238636;
   --color-cyan: #56d4dd;
 
-  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, 'SFMono-Regular',
-    'Cascadia Code', Consolas, monospace;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --grid-line: rgba(63, 185, 80, 0.05);
+  color-scheme: dark;
 }
 
 html {
@@ -38,8 +65,8 @@ body {
 /* Faint grid texture used behind the hero and section headers. */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(63, 185, 80, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(63, 185, 80, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
@@ -64,3 +91,9 @@ body {
   font-size: 0.875rem;
   letter-spacing: 0.05em;
 }
+
+/* Theme toggle: show the icon for the theme you'd switch TO.
+   Light (default) shows the moon; dark shows the sun. */
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme='dark'] .theme-toggle .icon-sun { display: block; }
+:root[data-theme='dark'] .theme-toggle .icon-moon { display: none; }

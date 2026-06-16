@@ -14,11 +14,73 @@ const href = (anchor: string) => (onHome ? `#${anchor}` : `/#${anchor}`);
     <a href="/" class="font-mono text-sm font-bold text-[var(--color-text)]">
       <span class="text-[var(--color-accent)]">~/</span>haochen.tong
     </a>
-    <ul class="hidden gap-6 font-mono text-sm text-[var(--color-muted)] sm:flex">
-      <li><a href={href('work')} class="hover:text-[var(--color-accent)]">work</a></li>
-      <li><a href={href('experience')} class="hover:text-[var(--color-accent)]">experience</a></li>
-      <li><a href={href('skills')} class="hover:text-[var(--color-accent)]">skills</a></li>
-      <li><a href={href('contact')} class="hover:text-[var(--color-accent)]">contact</a></li>
-    </ul>
+    <div class="flex items-center gap-5">
+      <ul class="hidden gap-6 font-mono text-sm text-[var(--color-muted)] sm:flex">
+        <li><a href={href('work')} class="hover:text-[var(--color-accent)]">work</a></li>
+        <li><a href={href('experience')} class="hover:text-[var(--color-accent)]">experience</a></li>
+        <li><a href={href('skills')} class="hover:text-[var(--color-accent)]">skills</a></li>
+        <li><a href={href('contact')} class="hover:text-[var(--color-accent)]">contact</a></li>
+      </ul>
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle color theme"
+        title="Toggle light / dark"
+        class="theme-toggle inline-flex h-8 w-8 items-center justify-center rounded border border-[var(--color-border)] text-[var(--color-muted)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+      >
+        <svg
+          class="icon-moon"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg
+          class="icon-sun"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
   </nav>
 </header>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  toggle?.addEventListener('click', () => {
+    const root = document.documentElement;
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      root.removeAttribute('data-theme');
+    } else {
+      root.setAttribute('data-theme', 'dark');
+    }
+    try {
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    } catch (e) {}
+  });
+</script>

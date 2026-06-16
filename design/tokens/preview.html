@@ -11,63 +11,67 @@
     />
     <style>
       :root {
-        --bg: #0a0e14; --surface: #0d1117; --surface2: #11161f;
-        --border: #1f2630; --border-strong: #2d3748;
-        --text: #c9d1d9; --muted: #8b949e; --faint: #6e7681;
-        --accent: #3fb950; --accent-dim: #238636; --cyan: #56d4dd;
+        --color-bg: #ffffff; --color-surface: #f6f8fa; --color-border: #d0d7de;
+        --color-text: #1f2328; --color-muted: #57606a; --color-faint: #818b98;
+        --color-accent: #1a7f37; --color-cyan: #0a7ea4; color-scheme: light;
       }
-      body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+      :root[data-theme='dark'] {
+        --color-bg: #0a0e14; --color-surface: #0d1117; --color-border: #1f2630;
+        --color-text: #c9d1d9; --color-muted: #8b949e; --color-faint: #6e7681;
+        --color-accent: #3fb950; --color-cyan: #56d4dd; color-scheme: dark;
+      }
+      body { background: var(--color-bg); color: var(--color-text); font-family: 'Inter', sans-serif; }
       .mono { font-family: 'JetBrains Mono', monospace; }
+      .swatch { height: 2.5rem; border-radius: 0.375rem; border: 1px solid var(--color-border); }
+      .row { display: grid; grid-template-columns: 1fr auto auto; gap: 0.75rem; align-items: center; padding: 0.4rem 0; }
+      .ds-toggle {
+        position: fixed; top: 12px; right: 12px; z-index: 99; border: 1px solid var(--color-border);
+        background: var(--color-surface); color: var(--color-muted); font-family: 'JetBrains Mono', monospace;
+        font-size: 12px; border-radius: 6px; padding: 6px 10px; cursor: pointer;
+      }
     </style>
   </head>
   <body class="p-10">
-    <h1 class="mono text-2xl font-bold" style="color: var(--accent)">// design tokens</h1>
-    <p class="mono mt-1 text-sm" style="color: var(--muted)">terminal / AI-infra aesthetic</p>
+    <button class="ds-toggle" onclick="var r=document.documentElement;r.getAttribute('data-theme')==='dark'?r.removeAttribute('data-theme'):r.setAttribute('data-theme','dark');">◑ theme</button>
+    <h1 class="mono text-2xl font-bold" style="color: var(--color-accent)">// design tokens</h1>
+    <p class="mono mt-1 text-sm" style="color: var(--color-muted)">terminal / AI-infra aesthetic · light default, dark optional</p>
 
-    <h2 class="mono mt-8 text-sm font-bold" style="color: var(--cyan)">color</h2>
-    <div class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
-      <!-- swatches -->
-      <div class="rounded border p-3" style="border-color: var(--border)">
-        <div class="h-12 rounded" style="background: #0a0e14"></div>
-        <p class="mono mt-2 text-xs" style="color: var(--muted)">bg · #0a0e14</p>
+    <div class="mt-8 grid gap-10 lg:grid-cols-2">
+      <!-- LIGHT palette -->
+      <div>
+        <h2 class="mono text-sm font-bold" style="color: var(--color-cyan)">light (default)</h2>
+        <div class="mt-3">
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">bg</span><span class="mono text-xs" style="color: var(--color-faint)">#ffffff</span><span class="swatch" style="background:#ffffff;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">surface</span><span class="mono text-xs" style="color: var(--color-faint)">#f6f8fa</span><span class="swatch" style="background:#f6f8fa;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">border</span><span class="mono text-xs" style="color: var(--color-faint)">#d0d7de</span><span class="swatch" style="background:#d0d7de;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">text</span><span class="mono text-xs" style="color: var(--color-faint)">#1f2328</span><span class="swatch" style="background:#1f2328;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">muted</span><span class="mono text-xs" style="color: var(--color-faint)">#57606a</span><span class="swatch" style="background:#57606a;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">accent</span><span class="mono text-xs" style="color: var(--color-faint)">#1a7f37</span><span class="swatch" style="background:#1a7f37;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">cyan</span><span class="mono text-xs" style="color: var(--color-faint)">#0a7ea4</span><span class="swatch" style="background:#0a7ea4;width:120px"></span></div>
+        </div>
       </div>
-      <div class="rounded border p-3" style="border-color: var(--border)">
-        <div class="h-12 rounded" style="background: #0d1117"></div>
-        <p class="mono mt-2 text-xs" style="color: var(--muted)">surface · #0d1117</p>
-      </div>
-      <div class="rounded border p-3" style="border-color: var(--border)">
-        <div class="h-12 rounded" style="background: #1f2630"></div>
-        <p class="mono mt-2 text-xs" style="color: var(--muted)">border · #1f2630</p>
-      </div>
-      <div class="rounded border p-3" style="border-color: var(--border)">
-        <div class="h-12 rounded" style="background: #c9d1d9"></div>
-        <p class="mono mt-2 text-xs" style="color: var(--muted)">text · #c9d1d9</p>
-      </div>
-      <div class="rounded border p-3" style="border-color: var(--border)">
-        <div class="h-12 rounded" style="background: #8b949e"></div>
-        <p class="mono mt-2 text-xs" style="color: var(--muted)">muted · #8b949e</p>
-      </div>
-      <div class="rounded border p-3" style="border-color: var(--border)">
-        <div class="h-12 rounded" style="background: #3fb950"></div>
-        <p class="mono mt-2 text-xs" style="color: var(--muted)">accent · #3fb950</p>
-      </div>
-      <div class="rounded border p-3" style="border-color: var(--border)">
-        <div class="h-12 rounded" style="background: #238636"></div>
-        <p class="mono mt-2 text-xs" style="color: var(--muted)">accent-dim · #238636</p>
-      </div>
-      <div class="rounded border p-3" style="border-color: var(--border)">
-        <div class="h-12 rounded" style="background: #56d4dd"></div>
-        <p class="mono mt-2 text-xs" style="color: var(--muted)">cyan · #56d4dd</p>
+      <!-- DARK palette -->
+      <div>
+        <h2 class="mono text-sm font-bold" style="color: var(--color-cyan)">dark</h2>
+        <div class="mt-3">
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">bg</span><span class="mono text-xs" style="color: var(--color-faint)">#0a0e14</span><span class="swatch" style="background:#0a0e14;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">surface</span><span class="mono text-xs" style="color: var(--color-faint)">#0d1117</span><span class="swatch" style="background:#0d1117;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">border</span><span class="mono text-xs" style="color: var(--color-faint)">#1f2630</span><span class="swatch" style="background:#1f2630;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">text</span><span class="mono text-xs" style="color: var(--color-faint)">#c9d1d9</span><span class="swatch" style="background:#c9d1d9;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">muted</span><span class="mono text-xs" style="color: var(--color-faint)">#8b949e</span><span class="swatch" style="background:#8b949e;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">accent</span><span class="mono text-xs" style="color: var(--color-faint)">#3fb950</span><span class="swatch" style="background:#3fb950;width:120px"></span></div>
+          <div class="row"><span class="mono text-xs" style="color: var(--color-muted)">cyan</span><span class="mono text-xs" style="color: var(--color-faint)">#56d4dd</span><span class="swatch" style="background:#56d4dd;width:120px"></span></div>
+        </div>
       </div>
     </div>
 
-    <h2 class="mono mt-8 text-sm font-bold" style="color: var(--cyan)">type scale</h2>
+    <h2 class="mono mt-10 text-sm font-bold" style="color: var(--color-cyan)">type scale</h2>
     <div class="mt-3 space-y-2">
       <p class="mono text-5xl font-bold">Haochen Tong</p>
-      <p class="mono text-2xl font-bold" style="color: var(--cyan)">systems &amp; AI-infra engineer</p>
-      <p class="text-lg" style="color: var(--muted)">Body copy — Inter, generous line height, muted gray.</p>
-      <p class="mono text-sm" style="color: var(--accent)">// section label — mono, accent green</p>
-      <p class="mono text-xs" style="color: var(--faint)">caption / chip — mono, faint</p>
+      <p class="mono text-2xl font-bold" style="color: var(--color-cyan)">systems &amp; AI-infra engineer</p>
+      <p class="text-lg" style="color: var(--color-muted)">Body copy — Inter, generous line height.</p>
+      <p class="mono text-sm" style="color: var(--color-accent)">// section label — mono, accent</p>
+      <p class="mono text-xs" style="color: var(--color-faint)">caption / chip — mono, faint</p>
     </div>
   </body>
 </html>

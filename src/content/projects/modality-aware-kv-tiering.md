@@ -18,7 +18,7 @@ categories:
   - ai-infra
   - rag
 links:
-  github: https://github.com/haochentSC/Modality-Aware-KV-Tiering-for-Multimodal-RAG
+  github: https://github.com/Shr3yash/Modality-Aware-KV-Tiering-for-Multimodal-RAG
 featured: true
 order: 2
 ---

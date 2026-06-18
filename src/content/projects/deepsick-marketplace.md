@@ -1,6 +1,6 @@
 ---
 title: Deepsick Marketplace
-tagline: Second-hand marketplace with fair-price analytics — React + FastAPI + MySQL, with auth, buyer-seller messaging, and advanced database programs.
+tagline: Second-hand marketplace with fair-price analytics — React + FastAPI + MySQL on GCP, with auth, buyer-seller messaging, and advanced database programs.
 role: Auth, messaging & advanced DB programs (team of 4)
 period: Spring 2026
 status: complete
@@ -10,7 +10,8 @@ stack:
   - FastAPI
   - Python
   - MySQL 8
-  - GCP Cloud SQL
+  - GCP (Cloud SQL + hosting)
+  - Cloud SQL Auth Proxy
   - PBKDF2 / HMAC
 metrics:
   - { label: "PBKDF2-SHA256 iterations", value: "390k" }
@@ -30,11 +31,13 @@ order: 4
 A second-hand marketplace (CS411 database project, team of 4) where buyers evaluate used items with
 data-driven context. The differentiator is **fair-price comparison** against a peer group of similar
 listings — same category, brand, and condition — seeded from ~1.4M Mercari listings, on a normalized
-6-table MySQL schema running on GCP Cloud SQL.
+6-table MySQL 8 schema. Both the FastAPI backend and the database are hosted on **Google Cloud
+Platform** — MySQL 8 on **Cloud SQL**, reached through the Cloud SQL Auth Proxy.
 
 ## My role
 
-I owned the **authentication system, the messaging backend, and all three advanced database programs**.
+I owned the **authentication system, the messaging backend, all three advanced database programs, and
+the database connection pooling** that backs every request to Cloud SQL.
 
 ### Authentication — built from scratch, no framework
 - **Password hashing** with PBKDF2-SHA256 at **390,000 iterations** and a random 16-byte salt

@@ -127,4 +127,23 @@ const { title, tagline, role, period, status, stack, metrics, links } = project.
   }
   .prose-portfolio strong { color: var(--color-text); }
   .prose-portfolio img { border-radius: 0.5rem; border: 1px solid var(--color-border); }
+  .prose-portfolio figure {
+    margin: 1.5rem 0;
+  }
+  .prose-portfolio figure img {
+    display: block;
+    width: 100%;
+    background: var(--color-surface);
+  }
+  .prose-portfolio figcaption {
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-faint);
+    text-align: center;
+  }
+  .prose-portfolio figcaption::before {
+    content: 'fig. ';
+    color: var(--color-accent);
+  }
 </style>

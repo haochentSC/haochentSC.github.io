@@ -34,6 +34,16 @@ listings — same category, brand, and condition — seeded from ~1.4M Mercari l
 6-table MySQL 8 schema. Both the FastAPI backend and the database are hosted on **Google Cloud
 Platform** — MySQL 8 on **Cloud SQL**, reached through the Cloud SQL Auth Proxy.
 
+<figure>
+  <img src="/media/deepsick-marketplace/01_marketplace.png" alt="Deepsick Marketplace browse page: a product grid of second-hand listings with category, brand, condition, and status filters, each card showing price and a Message Seller button." />
+  <figcaption>Marketplace browse — product grid with category / brand / condition / status filters, fair-price detail, and per-listing seller contact.</figcaption>
+</figure>
+
+<figure>
+  <img src="/media/deepsick-marketplace/02_price_assistant.png" alt="Fair-price analytics table comparing each listing's selling price against the peer average price and peer count for the same brand, category, and condition." />
+  <figcaption>Fair-price assistant — the differentiator: each listing's price vs. the peer average (matching brand, category, and condition) across active and sold listings.</figcaption>
+</figure>
+
 ## My role
 
 I owned the **authentication system, the messaging backend, all three advanced database programs, and
@@ -59,6 +69,21 @@ the database connection pooling** that backs every request to Cloud SQL.
 - **SERIALIZABLE transaction wrapper** — wraps the stored-procedure call at the strictest isolation
   level so two rapid "Message Seller" clicks can't create duplicate threads; either everything commits
   or everything rolls back.
+
+<figure>
+  <img src="/media/deepsick-marketplace/04_messages.png" alt="Buyer-seller messaging UI: an inbox of conversation threads on the left and an open thread on the right showing a back-and-forth between a buyer and seller about a listing." />
+  <figcaption>Messaging backend — threads created from a listing's "Message Seller" land in the inbox; opening one shows the buyer↔seller conversation, reopened automatically on a new message by the <code>after_message_insert</code> trigger.</figcaption>
+</figure>
+
+<figure>
+  <img src="/media/deepsick-marketplace/05_seller_profile.png" alt="Unified seller profile timeline: a single table interleaving active listings and completed/returned sales with amount, transaction id, status, buyer, return status, and timestamp." />
+  <figcaption>Seller profile — one stored-procedure-backed timeline interleaving active listings, completed/returned sales, and the latest return status per item.</figcaption>
+</figure>
+
+<figure>
+  <img src="/media/deepsick-marketplace/03_power_users.png" alt="Power-users ranking table listing users by an engagement score combining completed purchases, completed sales, and active listings." />
+  <figcaption>Power-users analytics — ranks users active as both buyers and sellers by an engagement score (purchases + sales + active listings).</figcaption>
+</figure>
 
 ## Schema design
 

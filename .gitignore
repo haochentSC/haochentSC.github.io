@@ -12,3 +12,9 @@ npm-debug.log*
 # os
 .DS_Store
 Thumbs.db
+# resume/ is DELIBERATELY TRACKED — read resume/README.md before adding an ignore here.
+# It holds the master resume, its evidence ledgers, and per-application selections.
+# Keep this repository PRIVATE: those files carry contact details, candid verification
+# notes, and internals of a closed-source project.
+# Nothing under resume/ reaches the built site — Astro builds src/ and public/ only, and
+# the Pages workflow uploads dist/. Tracking it here does not publish it to the website.

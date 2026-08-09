@@ -1,0 +1,67 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Haochen Tong — Resume</title>
+<style>
+  /* Mirrors the Jake LaTeX template's geometry so the HTML fallback paginates the same way:
+     letter paper, 0.5in margins, 11pt Computer-Modern-adjacent serif. */
+  @page { size: letter; margin: 0.5in 0.5in 0.5in 0.5in; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Latin Modern Roman", "Times New Roman", Times, serif;
+    font-size: 11pt; line-height: 1.18; color: #000; margin: 0;
+    -webkit-print-color-adjust: exact;
+  }
+  header { text-align: center; margin-bottom: 4pt; }
+  header .name {
+    font-variant: small-caps; font-size: 24pt; font-weight: 700;
+    letter-spacing: 0.5pt; line-height: 1.1;
+  }
+  header .contact { font-size: 9.5pt; margin-top: 2pt; }
+  header .contact a { color: #000; text-decoration: underline; }
+  .summary { font-size: 10pt; margin: 4pt 0 2pt; }
+  h2 {
+    font-variant: small-caps; font-size: 13pt; font-weight: 400;
+    margin: 9pt 0 1pt; padding-bottom: 1pt; border-bottom: 0.7pt solid #000;
+  }
+  .entry { margin: 3pt 0 0; }
+  .entry-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1em; }
+  .entry-row .left { font-weight: 700; }
+  .entry-row .right { white-space: nowrap; }
+  .entry-row.sub .left, .entry-row.sub .right { font-weight: 400; font-style: italic; font-size: 10pt; }
+  .proj .left { font-weight: 400; font-size: 10pt; }
+  .proj .left b { font-weight: 700; }
+  ul { margin: 1pt 0 0; padding-left: 1.5em; }
+  li { font-size: 10pt; margin-bottom: 1pt; }
+  .skills { font-size: 10pt; }
+  .skills div { margin-bottom: 1pt; }
+  a { color: #000; }
+</style>
+
+<header>
+  <div class="name">Haochen Tong</div>
+  <div class="contact">708-548-0314 · tonghaochen77@gmail.com  linkedin.com/in/haochent · github.com/haochentSC · haochentsc.github.io</div>
+</header>
+
+<div class="summary">MCS student at UIUC with production SWE internship experience building Flask/FastAPI backend services, async task pipelines, and full-stack TypeScript applications. Shipped and deployed live systems serving real users.</div>
+
+<h2>Education</h2>
+<div class="entry"><div class="entry-row"><span class="left">University of Illinois Urbana-Champaign</span><span class="right">Urbana, IL</span></div><div class="entry-row sub"><span class="left">Master of Computer Science (MCS)</span><span class="right">Jan 2026 – Present</span></div></div>
+<div class="entry"><div class="entry-row"><span class="left">University of Southern California</span><span class="right">Los Angeles, CA</span></div><div class="entry-row sub"><span class="left">B.S. Computer Science</span><span class="right">Aug 2022 – Dec 2025</span></div></div>
+
+<h2>Experience</h2>
+<div class="entry"><div class="entry-row"><span class="left">Software Engineering Intern</span><span class="right">Aug 2025 -- Dec 2025</span></div><div class="entry-row sub"><span class="left">Stringer News</span><span class="right">Los Angeles, CA</span></div><ul><li>Shipped a Flask Blueprint with REST endpoints for single-user and batch email digest dispatch, integrating SendGrid dynamic templates, PostgreSQL JSONB queries, and Redis-backed idempotency.</li><li>Built a recommendation enrichment layer joining cached JSONB recommendations with batch event lookups via PostgreSQL array queries, enabling batch sends of 100 users per request.</li><li>Implemented decorator-based API-key auth and structured 4xx/5xx error handling with per-user isolation, so one failing recipient could not abort an in-flight batch.</li><li>Engineered debounced auto-save with optimistic UI and sync conflict resolution for the article editor, cutting draft loss by 90%.</li><li>Containerized the backend services with Docker, cutting new-developer setup to under 15 minutes.</li></ul></div>
+
+<h2>Technical Projects</h2>
+<div class="entry proj"><div class="entry-row"><span class="left"><b>AgentVeris — Agentic Commerce Compliance Scanner</b> <a href="https://www.agentveris.com/">(www.agentveris.com)</a></span><span class="right"></span></div><ul><li><i>Python 3.12, FastAPI, Celery, PostgreSQL 16, Redis 7, SQLAlchemy/Alembic ·</i></li><li>Built the asynchronous scan pipeline behind a live SaaS: FastAPI submits and returns immediately, a Celery worker across 4 queues runs 8 check modules under per-check fault isolation, then crawls up to 10 product pages before scoring.</li><li>Designed the weighted scoring engine turning raw check rows into an agent-readiness score: 38 checks over 7 categories rolled into per-category percentages, then a weight vector summing to 1.0.</li><li>Built the Next.js 16 / React 19 / TypeScript frontend — 35 routes across the scan flow, dashboard and remediation workspace — with JWT sessions and TanStack Query polling live scans.</li><li>Deployed and operate the system in production: containerized FastAPI, Celery worker and MCP server on Railway with managed PostgreSQL and Redis, Next.js on Vercel, continuous deploy from main.</li></ul></div>
+<div class="entry proj"><div class="entry-row"><span class="left"><b>Deepsick Marketplace — Second-Hand Marketplace with Fair-Price Analytics</b> <a href="https://github.com/cs411-alawini/sp26-cs411-team038-Deepsick (course org, private)">(github.com/cs411-alawini/sp26-cs411-team038-Deepsick (course org, private))</a></span><span class="right">Jan 2026 -- Apr 2026</span></div><ul><li><i>Python, FastAPI, MySQL 8, GCP Cloud SQL, React 19, Vite, PBKDF2, HMAC, pytest</i></li><li>Built the marketplace's authentication from scratch with no auth framework: PBKDF2-SHA256 at 390,000 iterations over a 16-byte random salt, stored so the cost parameter can be raised without invalidating existing hashes.</li><li>Built the fair-price query that is the product's differentiator: a two-stage CTE gathering a listing's peer group on null-safe matches across category, brand and condition, returning fair, below-peers or above-peers against a ±20% band.</li><li>Engineered a SERIALIZABLE transaction wrapper around the stored-procedure call, committing on success and rolling back on any exception, so two rapid clicks cannot create duplicate threads.</li></ul></div>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+<div><b>Languages</b>: Python, Go, Java, C/C++, TypeScript, SQL</div>
+<div><b>Backend &amp; APIs</b>: FastAPI, Flask, REST, Celery, JWT, async/await</div>
+<div><b>Frontend</b>: Next.js, React, TypeScript, TanStack Query</div>
+<div><b>Data &amp; Storage</b>: PostgreSQL (JSONB), MySQL, Redis, Alembic</div>
+<div><b>Infra &amp; DevOps</b>: Docker, AWS, GCP, Railway, Vercel, CI/CD</div>
+<div><b>ML &amp; Simulation</b>: PyTorch, Gymnasium, VAE, PPO</div>
+<div><b>Testing &amp; Tools</b>: pytest, Git, Linux/CLI</div>
+</div>

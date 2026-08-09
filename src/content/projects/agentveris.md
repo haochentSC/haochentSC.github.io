@@ -1,6 +1,6 @@
 ---
 title: AgentVeris
-tagline: Production SaaS that scores whether an e-commerce site is discoverable and legible to AI shopping assistants — then sends a real LLM agent to shop the catalog and measures what it can and can't do. Results in ~30 seconds, no signup.
+tagline: Production SaaS that scores whether an e-commerce site is discoverable and legible to AI shopping assistants — then sends a real LLM agent to shop the catalog and measures what it can and can't do. Results in under a minute, no signup.
 role: Full-stack build & deploy
 period: 2026 – Present
 status: live
@@ -18,9 +18,9 @@ stack:
   - LLM eval harness
   - Railway / Vercel
 metrics:
-  - { label: "time to result", value: "~30s" }
+  - { label: "time to result", value: "<1 min" }
   - { label: "scoring categories", value: "7" }
-  - { label: "compliance checks", value: "30+" }
+  - { label: "compliance checks", value: "38" }
   - { label: "AI crawlers checked", value: "16" }
 categories:
   - fullstack
@@ -36,7 +36,7 @@ order: 3
 AI assistants now sit between shoppers and stores — roughly a fifth of online spend is AI-mediated
 discovery, and most of it is zero-click. But store owners have no way to tell whether an AI assistant
 can actually **find, understand, and trust** their products. AgentVeris scans a site and returns an
-agent-readiness score in ~30 seconds, no signup required — then goes a step further and runs a real
+agent-readiness score in under a minute, no signup required — then goes a step further and runs a real
 shopping agent against the catalog to show what an assistant experiences.
 
 The product deliberately leads with **discoverability and representation** rather than autonomous

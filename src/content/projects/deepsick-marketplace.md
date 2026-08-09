@@ -14,8 +14,8 @@ stack:
   - Cloud SQL Auth Proxy
   - PBKDF2 / HMAC
 metrics:
-  - { label: "PBKDF2-SHA256 iterations", value: "390k" }
-  - { label: "Mercari listings seeded", value: "~1.4M" }
+  - { label: "PBKDF2-SHA256 iterations", value: "390,000" }
+  - { label: "product rows seeded", value: "19,695" }
   - { label: "normalized tables", value: "6" }
 categories:
   - fullstack
@@ -30,8 +30,8 @@ order: 4
 
 A second-hand marketplace (CS411 database project, team of 4) where buyers evaluate used items with
 data-driven context. The differentiator is **fair-price comparison** against a peer group of similar
-listings — same category, brand, and condition — seeded from ~1.4M Mercari listings, on a normalized
-6-table MySQL 8 schema. Both the FastAPI backend and the database are hosted on **Google Cloud
+listings — same category, brand, and condition — computed over **19,695 product rows** loaded from a
+Mercari Kaggle export, on a normalized 6-table MySQL 8 schema. The database runs on **Google Cloud
 Platform** — MySQL 8 on **Cloud SQL**, reached through the Cloud SQL Auth Proxy.
 
 <figure>
@@ -46,8 +46,8 @@ Platform** — MySQL 8 on **Cloud SQL**, reached through the Cloud SQL Auth Prox
 
 ## My role
 
-I owned the **authentication system, the messaging backend, all three advanced database programs, and
-the database connection pooling** that backs every request to Cloud SQL.
+I owned the **authentication system, the messaging backend, and all three advanced database
+programs**, plus the Windows/Cloud SQL connectivity path that got the team connected.
 
 ### Authentication — built from scratch, no framework
 - **Password hashing** with PBKDF2-SHA256 at **390,000 iterations** and a random 16-byte salt
@@ -59,7 +59,8 @@ the database connection pooling** that backs every request to Cloud SQL.
   defeat timing attacks, with careful Base64 padding handling across platforms.
 
 ### Messaging + advanced database programs
-- **Messaging backend**: thread + message CRUD with per-message read tracking and thread archiving.
+- **Messaging backend**: thread and message CRUD over FastAPI/MySQL — thread listing with correlated
+  latest-message and message-count subqueries, chronological history, and sender authorization.
 - **Stored procedure** `initiate_conversation` — encapsulates the whole "contact seller" flow in the
   database: validates the product is active, confirms buyer/seller are distinct valid users, dedupes
   existing threads, rate-limits active conversations, and creates-or-appends. Uses a multi-relation

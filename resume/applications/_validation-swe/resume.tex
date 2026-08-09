@@ -1,0 +1,162 @@
+%-------------------------
+% Resume in LaTeX
+% Author : Jake Gutierrez (template)
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%
+% Preamble copied verbatim from haochent_resume_v1.tex.
+% Body is filled by resume-tailor/scripts/render.py via {{PLACEHOLDER}} substitution.
+% This is NOT a Jinja template — plain string replacement, no dependencies.
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Haochen Tong} \\ \vspace{1pt}
+    \small 708-548-0314 $|$ \href{mailto:tonghaochen77@gmail.com}{\underline{tonghaochen77@gmail.com}} $|$ \href{https://linkedin.com/in/haochent}{\underline{linkedin.com/in/haochent}} $|$ \href{https://github.com/haochentSC}{\underline{github.com/haochentSC}}
+\end{center}
+
+\vspace{-6pt}
+\small MCS student at UIUC with production SWE internship experience building Flask/FastAPI backend services, async task pipelines, and full-stack TypeScript applications. Shipped and deployed live systems serving real users.
+\vspace{2pt}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of Illinois Urbana-Champaign}{Urbana, IL}
+      {Master of Computer Science (MCS)}{Jan 2026 -- Present}
+    \resumeSubheading
+      {University of Southern California}{Los Angeles, CA}
+      {B.S. Computer Science}{Aug 2022 -- Dec 2025}
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+\resumeSubheading
+  {Software Engineering Intern}{Aug 2025 -- Dec 2025}
+  {Stringer News}{Los Angeles, CA}
+  \resumeItemListStart
+    \resumeItem{Shipped a Flask Blueprint with REST endpoints for single-user and batch email digest dispatch, integrating SendGrid dynamic templates, PostgreSQL JSONB queries, and Redis-backed idempotency.}
+    \resumeItem{Built a recommendation enrichment layer joining cached JSONB recommendations with batch event lookups via PostgreSQL array queries, enabling batch sends of 100 users per request.}
+    \resumeItem{Implemented decorator-based API-key auth and structured 4xx/5xx error handling with per-user isolation, so one failing recipient could not abort an in-flight batch.}
+    \resumeItem{Engineered debounced auto-save with optimistic UI and sync conflict resolution for the article editor, cutting draft loss by 90\%.}
+    \resumeItem{Containerized the backend services with Docker, cutting new-developer setup to under 15 minutes.}
+  \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Technical Projects}
+  \resumeSubHeadingListStart
+\resumeProjectHeading
+  {\textbf{AgentVeris --- Agentic Commerce Compliance Scanner} \href{https://www.agentveris.com/}{\scriptsize(www.agentveris.com)}}{}
+  \resumeItemListStart
+    \resumeItem{\emph{Python 3.12, FastAPI, Celery, PostgreSQL 16, Redis 7, SQLAlchemy/Alembic $\cdot$}}
+    \resumeItem{Built the asynchronous scan pipeline behind a live SaaS: FastAPI submits and returns immediately, a Celery worker across 4 queues runs 8 check modules under per-check fault isolation, then crawls up to 10 product pages before scoring.}
+    \resumeItem{Designed the weighted scoring engine turning raw check rows into an agent-readiness score: 38 checks over 7 categories rolled into per-category percentages, then a weight vector summing to 1.0.}
+    \resumeItem{Built the Next.js 16 / React 19 / TypeScript frontend --- 35 routes across the scan flow, dashboard and remediation workspace --- with JWT sessions and TanStack Query polling live scans.}
+    \resumeItem{Deployed and operate the system in production: containerized FastAPI, Celery worker and MCP server on Railway with managed PostgreSQL and Redis, Next.js on Vercel, continuous deploy from main.}
+  \resumeItemListEnd
+
+\resumeProjectHeading
+  {\textbf{Deepsick Marketplace --- Second-Hand Marketplace with Fair-Price Analytics} \href{https://github.com/cs411-alawini/sp26-cs411-team038-Deepsick (course org, private)}{\scriptsize(github.com/cs411-alawini/sp26-cs411-team038-Deepsick (course org, private))}}{Jan 2026 -- Apr 2026}
+  \resumeItemListStart
+    \resumeItem{\emph{Python, FastAPI, MySQL 8, GCP Cloud SQL, React 19, Vite, PBKDF2, HMAC, pytest}}
+    \resumeItem{Built the marketplace's authentication from scratch with no auth framework: PBKDF2-SHA256 at 390,000 iterations over a 16-byte random salt, stored so the cost parameter can be raised without invalidating existing hashes.}
+    \resumeItem{Built the fair-price query that is the product's differentiator: a two-stage CTE gathering a listing's peer group on null-safe matches across category, brand and condition, returning fair, below-peers or above-peers against a ±20\% band.}
+    \resumeItem{Engineered a SERIALIZABLE transaction wrapper around the stored-procedure call, committing on success and rolling back on any exception, so two rapid clicks cannot create duplicate threads.}
+  \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------SKILLS-----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small\item{
+    \textbf{Languages}{:  Python, Go, Java, C/C++, TypeScript, SQL} \\
+    \textbf{Backend \& APIs}{:  FastAPI, Flask, REST, Celery, JWT, async/await} \\
+    \textbf{Frontend}{:  Next.js, React, TypeScript, TanStack Query} \\
+    \textbf{Data \& Storage}{:  PostgreSQL (JSONB), MySQL, Redis, Alembic} \\
+    \textbf{Infra \& DevOps}{:  Docker, AWS, GCP, Railway, Vercel, CI/CD} \\
+    \textbf{ML \& Simulation}{:  PyTorch, Gymnasium, VAE, PPO} \\
+    \textbf{Testing \& Tools}{:  pytest, Git, Linux/CLI}
+  }
+\end{itemize}
+
+\end{document}

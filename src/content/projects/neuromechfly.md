@@ -38,7 +38,11 @@ standard RL tooling.
 - A **binocular vision pipeline** that splits left/right compound-eye inputs, maps them through
   FlyGym's hexagonal photoreceptor `Retina` model, and computes brightness-asymmetry control vectors
   with **OpenCV CUDA acceleration** (CPU fallback).
-- A Gymnasium `Env` wrapper exposing `step`/`reset`/`render` for downstream RL policies, plus a
-  rule-based controller mapping retinal observations to discrete locomotion primitives.
+- A Gymnasium `Env` wrapper exposing `step`/`reset`/`render` over the fly simulation, driving all 42
+  actuated leg DOFs by resampling recorded *Drosophila* kinematics — a replay environment with an
+  RL-shaped interface, not yet a policy-driven one.
+- Separately, a rule-based inter-leg coordination gait encoding three coupling rules across six legs
+  as a weighted directed multigraph. The vision front end and the gait controller are independent
+  subsystems here; closing the loop between them is the obvious next step.
 - Reproducible MP4 rollouts, arena previews, and joint-DOF time-series plots for vision diagnostics
   and kinematic replay debugging.

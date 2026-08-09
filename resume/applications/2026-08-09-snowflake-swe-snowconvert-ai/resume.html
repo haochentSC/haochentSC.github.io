@@ -1,0 +1,67 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Haochen Tong — Resume</title>
+<style>
+  /* Mirrors the Jake LaTeX template's geometry so the HTML fallback paginates the same way:
+     letter paper, 0.5in margins, 11pt Computer-Modern-adjacent serif. */
+  @page { size: letter; margin: 0.5in 0.5in 0.5in 0.5in; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Latin Modern Roman", "Times New Roman", Times, serif;
+    font-size: 11pt; line-height: 1.18; color: #000; margin: 0;
+    -webkit-print-color-adjust: exact;
+  }
+  header { text-align: center; margin-bottom: 4pt; }
+  header .name {
+    font-variant: small-caps; font-size: 24pt; font-weight: 700;
+    letter-spacing: 0.5pt; line-height: 1.1;
+  }
+  header .contact { font-size: 9.5pt; margin-top: 2pt; }
+  header .contact a { color: #000; text-decoration: underline; }
+  .summary { font-size: 10pt; margin: 4pt 0 2pt; }
+  h2 {
+    font-variant: small-caps; font-size: 13pt; font-weight: 400;
+    margin: 6pt 0 1pt; padding-bottom: 1pt; border-bottom: 0.7pt solid #000;
+  }
+  .entry { margin: 3pt 0 0; }
+  .entry-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1em; }
+  .entry-row .left { font-weight: 700; }
+  .entry-row .right { white-space: nowrap; }
+  .entry-row.sub .left, .entry-row.sub .right { font-weight: 400; font-style: italic; font-size: 10pt; }
+  .proj .left { font-weight: 400; font-size: 10pt; }
+  .proj .left b { font-weight: 700; }
+  ul { margin: 1pt 0 0; padding-left: 1.5em; }
+  li { font-size: 10pt; margin-bottom: 1pt; }
+  .skills { font-size: 10pt; }
+  .skills div { margin-bottom: 1pt; }
+  a { color: #000; }
+</style>
+
+<header>
+  <div class="name">Haochen Tong</div>
+  <div class="contact">708-548-0314 · tonghaochen77@gmail.com · linkedin.com/in/haochent · github.com/haochentSC · haochentsc.github.io</div>
+</header>
+
+<div class="summary">MCS student at UIUC with production SWE internship experience and self-directed work in agentic AI and distributed systems. Builds async Python and Go backends, LLM agents, and the evaluation harnesses that measure whether they actually work.</div>
+
+<h2>Education</h2>
+<div class="entry"><div class="entry-row"><span class="left">University of Illinois Urbana-Champaign</span><span class="right">Urbana, IL</span></div><div class="entry-row sub"><span class="left">Master of Computer Science (MCS)</span><span class="right">Jan 2026 – Present</span></div></div>
+<div class="entry"><div class="entry-row"><span class="left">University of Southern California</span><span class="right">Los Angeles, CA</span></div><div class="entry-row sub"><span class="left">B.S. Computer Science</span><span class="right">Aug 2022 – Dec 2025</span></div></div>
+
+<h2>Experience</h2>
+<div class="entry"><div class="entry-row"><span class="left">Software Engineering Intern</span><span class="right">Aug 2025 – Dec 2025</span></div><div class="entry-row sub"><span class="left">Stringer News</span><span class="right">Los Angeles, CA</span></div><ul><li>Shipped a Flask Blueprint exposing REST endpoints for single-user and batch email digest dispatch, integrating SendGrid templates, PostgreSQL JSONB queries, and Redis-backed idempotency.</li><li>Built a recommendation enrichment layer joining cached JSONB data with batch event lookups through PostgreSQL array queries, enabling batch sends of 100 users per request.</li><li>Implemented decorator-based API-key authentication and structured 4xx/5xx error handling with per-user isolation, so a single failing recipient could not abort an in-flight batch.</li></ul></div>
+
+<h2>Technical Projects</h2>
+<div class="entry proj"><div class="entry-row"><span class="left"><b>AgentVeris — Agentic Commerce Compliance Scanner</b> <a href="https://www.agentveris.com/">(www.agentveris.com)</a></span><span class="right"></span></div><ul><li><i>Python 3.12, FastAPI, Celery, PostgreSQL 16, Redis 7, SQLAlchemy/Alembic ·</i></li><li>Built an LLM shopping agent on the Anthropic SDK over a small 5-tool surface with a 12-iteration cap, behind an adapter whose frozen-fixture and live-site implementations run identical agent code.</li><li>Built an agent evaluation harness with a 6-class failure taxonomy and 9 graded cases, where a programmatic oracle owns every computable verdict and an LLM judge owns only the subjective slice.</li><li>Gated merges on agent reliability, not tests alone: CI re-runs the 9-case suite and fails the PR if any of 4 metrics drops below a committed baseline, proved by injecting a regression it must reject.</li><li>Measured two agent backends on one 9-case harness via an added Ollama client: Claude Sonnet 4.6 hit 89% success at $0.035/task vs open-weight gpt-oss:120b at 78% with no marginal cost — making model choice a measured eval dimension.</li></ul></div>
+<div class="entry proj"><div class="entry-row"><span class="left"><b>Distributed KV Cache for LLM Inference</b> <a href="https://github.com/haochentSC/Distributed-KV-Cache-for-LLM-Inference">(github.com/haochentSC/Distributed-KV-Cache-for-LLM-Inference)</a></span><span class="right">May 2026 – Jun 2026</span></div><ul><li><i>Go, gRPC/Protobuf, etcd, consistent hashing, vLLM, AWS, Terraform, Prometheus</i></li><li>Built a distributed KV cache in Go — consistent-hash sharding, RF=2 async replication, etcd-coordinated failover — cutting time-to-first-token 10.9% on 4k-token shared prefixes, measured cross-AZ on AWS.</li><li>Chaos-tested a live 3-node AWS cluster with a correctness verifier running through injected egress latency, an etcd partition and a real node termination: 0 violations across 27,365 fault-injected requests.</li></ul></div>
+<div class="entry proj"><div class="entry-row"><span class="left"><b>Deepsick Marketplace — Second-Hand Marketplace with Fair-Price Analytics</b> <a href="https://github.com/cs411-alawini/sp26-cs411-team038-Deepsick">(github.com/cs411-alawini/sp26-cs411-team038-Deepsick, course org, private)</a></span><span class="right">Jan 2026 – Apr 2026</span></div><ul><li><i>Python, FastAPI, MySQL 8, GCP Cloud SQL, React 19, Vite, PBKDF2, HMAC, pytest</i></li><li>Built a stored procedure moving the contact-seller flow into MySQL: JOINs validate the listing and participants, four SIGNAL SQLSTATE guards return descriptive errors, a GROUP BY caps open threads.</li><li>Built the fair-price analytics query: a two-stage CTE gathering a listing's peer group on null-safe matches across category, brand and condition, scored against a ±20% band.</li></ul></div>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+<div><b>Languages</b>: Python, Go, SQL, TypeScript</div>
+<div><b>Agentic AI &amp; LLM</b>: Anthropic SDK, LLM agents, tool use, MCP (FastMCP), LLM-as-judge evaluation, cross-model cost/latency benchmarking, vLLM, KV caching</div>
+<div><b>Backend &amp; APIs</b>: FastAPI, Flask, REST API design, Celery, async/await, gRPC/Protobuf, authentication</div>
+<div><b>Distributed Systems</b>: etcd, consistent hashing, replication &amp; failover, chaos engineering, correctness oracles</div>
+<div><b>Data &amp; Storage</b>: PostgreSQL, MySQL, stored procedures, triggers, transactions, CTEs, Redis, JSONB, Alembic</div>
+<div><b>Infra, CI &amp; Testing</b>: Docker, AWS, Terraform, GCP/Cloud SQL, Railway, Vercel, GitHub Actions, pytest</div>
+</div>

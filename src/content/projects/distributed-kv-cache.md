@@ -15,7 +15,7 @@ stack:
   - Prometheus
 metrics:
   - { label: "TTFT @ 4k tokens", value: "−10.9%" }
-  - { label: "correctness violations / 10k+ req", value: "0" }
+  - { label: "correctness violations / 27,365 req", value: "0" }
   - { label: "ShareGPT requests replayed", value: "6,782" }
   - { label: "organic block hit rate", value: "32.7%" }
 categories:
@@ -53,8 +53,9 @@ but only past the point where the network round-trip is cheaper than recompute.
 </figure>
 - Consistent-hashing shard placement, **RF=2 async replication** with implicit promotion, and
   etcd-coordinated failover with graceful Spot drain; sustained **0 correctness violations across
-  10k+ requests per run** under injected latency, etcd partitions, hard node kills, and real AWS Spot
-  interruptions — verified by a client-side integrity oracle that re-hashes every fetched block.
+  27,365 fault-injected requests** under injected latency, etcd partitions, and hard node kills —
+  verified by a client-side integrity oracle that re-hashes every fetched block. Real AWS Spot
+  reclaims hit during provisioning too, but those were not part of the verified-load chaos runs.
 - A custom vLLM `KVConnectorBase_V1` connector (no fork) that pages KV tensors GPU↔host↔gRPC, with
   tensor-parallel-aware key namespacing validated end-to-end at **TP=4 / Qwen2.5-32B on 4× A40**
   (512 writes = 128 blocks × 4 ranks, exactly once).
@@ -82,7 +83,8 @@ fairness knob saturates within `w ∈ (0, 0.25]`.
 Provisioned and benchmarked the cluster on AWS via Terraform — Spot cache nodes, a 3-node etcd
 quorum, S3 cold tier, ECR, and CloudWatch alarms with `treat_missing_data="breaching"` for node-loss
 detection. Replayed **6,782 ShareGPT requests** on the live 3-node cluster at a **32.7% organic block
-hit rate**, p50 62 ms, balanced across shards, for ≈$5–7 total GPU spend.
+hit rate**, p50 62 ms, balanced across shards. Total GPU spend across all three benchmark
+windows — one AWS L4, one A100, one 4× A40 — was ≈$9–11.
 
 ## Where the cache *doesn't* win
 

@@ -1,6 +1,6 @@
 ---
 title: AgentVeris
-tagline: Production SaaS that scans any e-commerce site and scores its readiness for AI shopping agents — results in ~30 seconds, no signup.
+tagline: Production SaaS that scans any e-commerce site and scores its readiness for AI shopping agents — results in under a minute, no signup.
 role: Full-stack build & deploy
 period: 2026 – Present
 status: live
@@ -16,9 +16,9 @@ stack:
   - MCP
   - Railway / Vercel
 metrics:
-  - { label: "compliance checks", value: "30+" }
-  - { label: "scan categories", value: "6" }
-  - { label: "time to result", value: "~30s" }
+  - { label: "compliance checks", value: "38" }
+  - { label: "scan categories", value: "7" }
+  - { label: "product pages crawled", value: "10" }
 categories:
   - fullstack
   - ai-tooling
@@ -32,18 +32,27 @@ order: 3
 
 As AI shopping agents start to crawl and transact on e-commerce sites, store owners have no easy way
 to tell whether their site is actually readable and usable by those agents. AgentVeris scans a site
-and returns an agent-readiness score in ~30 seconds, no signup required.
+and returns an agent-readiness score in under a minute, no signup required.
 
 ## Scoring
 
-A weighted score across **6 categories** (80+ = Agent-Ready · 50–79 = Needs Work · <50 = Not Ready):
+A weighted score across **7 categories** (80+ = Agent-Ready · 50–79 = Needs Work · <50 = Not Ready),
+organized as a **Discover → Understand → Act** arc — the scoring leads with discovery and
+representation, because AI's near-term job for most shoppers is to shortlist, not to autonomously buy.
 
-- **UCP Compliance** (20%) — `/.well-known/ucp` manifest: version, services, capabilities, signing keys
-- **Schema.org Quality** (20%) — Product JSON-LD on homepage + up to 10 product pages; Shopify feed
+**Discover (20%)**
 - **AI Bot Crawlability** (20%) — robots.txt permissions for 16 AI search/shopping bots; sitemaps
-- **Performance** (15%) — response time, HTTPS enforcement, redirect-chain length, catalog speed
-- **ACP Readiness** (10%) — Stripe/checkout-API indicators, catalog feed presence
+
+**Understand (35%)**
+- **Product Data Legibility** (20%) — attribute completeness, typed/filterable granularity, cross-source consistency
+- **Schema.org Quality** (15%) — Product JSON-LD on homepage + up to 10 product pages; Shopify feed
+
+**Act (35%)** — transaction protocols, a forward layer
 - **MCP Readiness** (15%) — `/.well-known/mcp.json` discovery, server-card validity, commerce tools
+- **UCP Compliance** (10%) — `/.well-known/ucp` manifest: version, services, capabilities, signing keys
+- **ACP Readiness** (10%) — Stripe/checkout-API indicators, catalog feed presence
+
+**Performance (10%)** — response time, HTTPS enforcement, redirect-chain length, catalog speed
 
 Per-check scoring (pass=10 / warning=5 / fail=0 / info excluded) rolls up to a per-category percentage,
 then the weighted overall. ACP/MCP use a half-credit `info` rule to keep their nascent denominators stable.
@@ -62,7 +71,7 @@ then the weighted overall. ACP/MCP use a half-credit `info` rule to keep their n
 - PostgreSQL schemas (Alembic-migrated) for scan history, raw scan artifacts (a data moat), and
   remediation workflows — persisting evidence links from failed checks into normalized issues.
 - A **Next.js 16 / React 19** frontend: JWT auth, live-polling results (TanStack Query, 2s/90s),
-  6 category cards, scan history dashboard, remediation workspace, issue detail pages, and a full set
+  7 category cards, scan history dashboard, remediation workspace, issue detail pages, and a full set
   of marketing/docs pages.
 - Deployment: Railway for containerized FastAPI, Celery workers, Redis, PostgreSQL, and the MCP server;
   Vercel for Next.js — environment-based config, continuous deployment from `main`.

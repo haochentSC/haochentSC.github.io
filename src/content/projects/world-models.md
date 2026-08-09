@@ -11,9 +11,9 @@ stack:
   - TensorBoard
   - NumPy
 metrics:
-  - { label: "VAE params", value: "4.35M" }
-  - { label: "MDN-RNN params", value: "422K" }
-  - { label: "PPO controller params", value: "867" }
+  - { label: "VAE params", value: "1.78M" }
+  - { label: "MDN-RNN params", value: "384K" }
+  - { label: "controller params", value: "867" }
 categories:
   - ml
   - reinforcement-learning
@@ -33,10 +33,11 @@ controller on those latents instead of raw pixels.
 
 - An end-to-end training pipeline with reproducible experiment tracking, model checkpointing, and
   TensorBoard observability.
-- A convolutional **VAE (4.35M params)** with KL annealing compressing 64×64×3 frames into 32-dim
-  latents (the vision model, V).
-- An **MDN-RNN memory model (422K params)** predicting the next latent from the current latent and
+- A convolutional **VAE (1.78M params)** compressing 64×64×3 frames into 32-dim latents (the vision
+  model, V), trained at a fixed low KL weight (β=1e-4) after posterior collapse at the default β
+  drove the model to ignore its latents entirely.
+- An **MDN-RNN memory model (384K params)** predicting the next latent from the current latent and
   action (the memory model, M).
-- An **867-parameter PPO controller** (C) trained on latent observations, reducing iteration time from
-  days (CMA-ES / evolutionary baselines) to hours while achieving consistent track-completion behavior
-  in simulation.
+- Two controller paths behind one module: an **867-parameter linear controller** (C) optimized as a
+  flat vector by CMA-ES, and a PPO policy trained directly on 32-dim VAE latents — reaching a mean
+  score of 285 over 10 evaluation episodes after 500k timesteps.

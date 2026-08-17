@@ -181,55 +181,48 @@ Aug 2022 – Dec 2025
 `id:` stringer-news · `2025-08 → 2025-12` · Los Angeles, CA · `attribution:` mine
 `site:` https://www.info.stringer.news/
 `portfolio:` src/components/ExperienceItem.astro
-`stack:` Python · Flask · REST · SendGrid · PostgreSQL (JSONB, array queries) · Redis · Docker · PowerShell
+`stack:` Python · Flask · REST · SendGrid · PostgreSQL (JSONB, array queries) · PowerShell
 
-> **No local repo on this machine.** Every bullet below is `self-attested`, sourced from
-> `haochent_resume_v1.tex` and `ExperienceItem.astro`, professionally tightened. Haochen has said
-> he will do a verification pass on this section; until then the numbers are carried forward but
-> flagged in `evidence/stringer-news.md`. See `resume-master/references/repoless-interview.md`.
+> **Source recovered 2026-08-14.** Local checkout at `C:\Users\tongh\stringer`, verified at
+> `5b8b129465782f43f3034e224690b78f236e0520`. Git history confirms Haochen authored the email system
+> and autosave debounce. The old resume remains the only source for the autosave outcome metrics;
+> see `evidence/stringer-news.md`.
 
-- **`sn-email-digest-api`** Shipped a Flask Blueprint exposing REST endpoints for single-user and
-  batch email digest dispatch, integrating SendGrid dynamic templates, PostgreSQL JSONB
-  recommendation queries, and Redis-backed idempotency into a production email pipeline.
-  `code-verified` · no metric claimed · `haochent_resume_v1.tex`:119 · 2026-08-04 · 242ch/3ln
-  `kw:` Python · Flask · REST · API design · SendGrid · PostgreSQL · JSONB · Redis · idempotency
+- **`sn-email-digest-api`** Shipped single-user and batch Flask endpoints for personalized email
+  digests, combining cached PostgreSQL recommendations with SendGrid dynamic templates.
+  `code-verified` · no metric claimed · `server/routes/notifications.py`:14-108 + `server/utils/email_service.py`:10-64@5b8b129 · 2026-08-14 · 153ch/2ln
+  `kw:` Python · Flask · REST · API design · SendGrid · PostgreSQL · JSONB
 
-- **`sn-batch-enrichment`** Built a recommendation enrichment layer joining cached JSONB
-  recommendations with batch event lookups through PostgreSQL array queries, enabling batch sends of
-  100 users per request.
-  `self-attested` · 100-user batch per request · `haochent_resume_v1.tex`:120 · 2026-08-04 · 182ch/2ln
+- **`sn-batch-enrichment`** Built recommendation enrichment that joins cached JSONB recommendations
+  to event details through a PostgreSQL array query, with batch dispatch defaulting to 100 opted-in
+  users.
+  `derived` · 100-user default · `server/routes/notifications.py`:77-108 + `server/utils/db_simple.py`:13-64@5b8b129 · 2026-08-14 · 182ch/2ln
   `kw:` PostgreSQL · JSONB · array queries · batch processing · caching · backend
 
-- **`sn-api-auth-isolation`** Implemented decorator-based API-key authentication and structured
-  4xx/5xx error handling with per-user isolation in batch dispatch, so a single failing recipient
-  could not abort an in-flight batch.
-  `code-verified` · no metric claimed · `haochent_resume_v1.tex`:121 · 2026-08-04 · 197ch/2ln
+- **`sn-api-auth-isolation`** Implemented API-key authentication and per-recipient error handling
+  for single-user and batch dispatch, returning structured errors and continuing after individual
+  send failures.
+  `code-verified` · no metric claimed · `server/utils/auth.py`:9-17 + `server/routes/notifications.py`:58-108@5b8b129 · 2026-08-14 · 174ch/2ln
   `kw:` authentication · API keys · error handling · fault isolation · REST · Python
 
-- **`sn-autosave-draftloss`** Engineered debounced auto-save with optimistic UI and sync conflict
-  resolution for the article editor, cutting draft loss by 90%.
-  `self-attested` · 90% reduction in draft loss · `haochent_resume_v1.tex`:122 · 2026-08-04 · 129ch/2ln
-  `kw:` frontend · debouncing · optimistic UI · conflict resolution · state synchronization
+- **`sn-autosave-draftloss`** Implemented debounced auto-save for article drafts, preserving
+  draft IDs across saves and triggering only on edits, cutting draft loss by 90%.
+  `self-attested` · 90% reduction in draft loss · code: `client/src/pages/posts/create.js`:708-802@5b8b129 · metric: `haochent_resume_v1.tex`:122 · 2026-08-14 · 150ch/2ln
+  `kw:` frontend · debouncing · auto-save · draft persistence · state synchronization
 
-- **`sn-autosave-reliability`** Engineered debounced auto-save with optimistic UI and sync conflict
-  resolution for the article editor, holding save failures below 0.5% of write attempts.
-  `self-attested` · <0.5% save-failure rate · `haochent_resume_v1.tex`:122 · 2026-08-04 · 154ch/2ln
-  `kw:` frontend · reliability · optimistic UI · conflict resolution · error rate
+- **`sn-autosave-reliability`** Implemented debounced auto-save for article drafts,
+  preserving draft IDs across saves and triggering only on edits, with save failures below 0.5%.
+  `self-attested` · <0.5% save-failure rate · code: `client/src/pages/posts/create.js`:708-802@5b8b129 · metric: `haochent_resume_v1.tex`:122 · 2026-08-14 · 155ch/2ln
+  `kw:` frontend · reliability · debouncing · auto-save · error state
 
-- **`sn-autosave-nometric`** Engineered debounced auto-save with optimistic UI and sync conflict
-  resolution, eliminating the draft-loss and save-failure paths that made the article editor
-  unreliable for writers on slow connections.
-  `code-verified` · no metric claimed — the defensible version when the numbers can't be sourced · `haochent_resume_v1.tex`:122 · 2026-08-04 · 202ch/2ln
-  `kw:` frontend · debouncing · optimistic UI · conflict resolution · state synchronization
+- **`sn-autosave-nometric`** Implemented debounced auto-save for article drafts, preserving
+  draft IDs across saves and triggering only on document edits.
+  `code-verified` · no metric claimed · `client/src/pages/posts/create.js`:708-802@5b8b129 · 2026-08-14 · 129ch/2ln
+  `kw:` frontend · debouncing · auto-save · draft persistence · state synchronization
 
-- **`sn-docker-onboarding`** Containerized the backend services with Docker, cutting new-developer
-  setup to under 15 minutes.
-  `self-attested` · <15 min onboarding · `haochent_resume_v1.tex`:123 · 2026-08-04 · 96ch/1ln
-  `kw:` Docker · containerization · developer tooling · onboarding · DevOps
-
-- **`sn-ops-scripts`** Wrote PowerShell operations scripts exercising the dispatch path in both
-  dry-run and live modes, making a production send verifiable before it reached real recipients.
-  `code-verified` · no metric claimed · `haochent_resume_v1.tex`:121 · 2026-08-04 · 167ch/2ln
+- **`sn-ops-scripts`** Wrote PowerShell scripts for the single-user and batch email endpoints with
+  environment-based API-key authentication and formatted response output.
+  `code-verified` · no metric claimed · `server/utils/batch_digest_send.ps1`:1-37 + `server/utils/single_digest_send.ps1`:1-36@5b8b129 · 2026-08-14 · 154ch/2ln
   `kw:` PowerShell · operations · scripting · testing · release verification
 
 ---
@@ -380,9 +373,9 @@ Aug 2022 – Dec 2025
   `kw:` VAE · posterior collapse · beta-VAE · KL divergence · debugging · model diagnostics · PyTorch
 
 - **`wm-ppo-latent-control`** Trained a PPO controller to drive purely on 32-dim VAE latents
-  rather than raw pixels, reaching a mean score of 285 over 10 real-environment episodes after
-  500,000 timesteps on a single laptop GPU.
-  `measured` · mean 285 over 10 episodes, 500k timesteps · `docs/images/final_scores.png`@7a8bd85 · 2026-08-04 · 197ch/2ln
+  rather than raw pixels, reaching a best episode score of 600 and a mean of 285 over 10
+  real-environment episodes after 500,000 timesteps on a single laptop GPU.
+  `measured` · best 600 (max reward 599.71), mean 285 ± 195, 500k timesteps · `checkpoints/ppo_results.json`@7a8bd85 · 2026-08-17 · 232ch/3ln
   `kw:` reinforcement learning · PPO · stable-baselines3 · Gymnasium · GPU training · policy learning
 
 - **`wm-eval-variance`** Reported CarRacing's high evaluation variance honestly by publishing
@@ -593,6 +586,17 @@ Anthropic SDK · MCP (FastMCP) · Next.js 16 · React 19 · TypeScript · Railwa
 > their weights. Everything about the eval harness, the agent, remediation, and CI rests on a private
 > repo: excellent interview material, no independent proof on paper. Lead with the verifiable half.
 
+> **Title and section, confirmed by Haochen 2026-08-15.** A second person is a **non-coding
+> co-founder** who participates in brainstorming; **every line of code is Haochen's.** That is why
+> `attribution:` stays `mine` on all bullets below and the ledger's "44 commits, one human" finding
+> still stands — it describes authorship, not the company. His title on LinkedIn and on applications
+> is **Technical Co-Founder**; keep the two surfaces identical. Do **not** "correct" a resume back to
+> a solo title on the strength of the commit count alone.
+>
+> **This entry may render under `Experience` rather than `Projects`** — it is a live product with a
+> founder title, and Google's 2026-08-13 application ships it that way, above Stringer News. The six
+> project slots under R9 are unchanged; only the section it prints in varies by application.
+
 - **`av-scan-pipeline`** Built the asynchronous scan pipeline behind a live SaaS — FastAPI
   submits a scan and returns immediately, a Celery worker across 4 queues runs 8 check modules under
   per-check fault isolation, then a multi-page crawler follows up to 10 product pages before scoring.
@@ -744,7 +748,7 @@ LLM-as-judge `av-judge-fnr`
 · etcd `kv-replication-failover` · replication & failover `kv-replication-failover` ·
 chaos engineering `kv-chaos-aws` · correctness oracles `kv-correctness-oracle`
 
-**Infra & DevOps** — Docker `sn-docker-onboarding`, `av-deploy` · AWS `kv-terraform-aws` ·
+**Infra & DevOps** — Docker `av-deploy` · AWS `kv-terraform-aws` ·
 Terraform `kv-terraform-aws` · GCP / Cloud SQL `ds-gcp-cloudsql` · Railway & Vercel `av-deploy` ·
 CI/CD `av-ci-gates`, `av-eval-gate`
 
@@ -758,7 +762,7 @@ CMA-ES `wm-controller-params` · Gymnasium `wm-dual-optimizer-paths`, `nmf-gym-e
 MuJoCo / MJCF `nmf-voxel-mjcf-arena` · OpenCV `nmf-cuda-fallback` · NumPy `wm-data-pipeline`
 
 **Frontend** — Next.js / React `av-nextjs-frontend` · TanStack Query `av-nextjs-frontend` ·
-optimistic UI & conflict resolution `sn-autosave-nometric` · Tailwind `av-nextjs-frontend`
+debounced auto-save `sn-autosave-nometric` · Tailwind `av-nextjs-frontend`
 
 **Observability & testing** — Prometheus `kv-observability-nodeloss` · CloudWatch
 `kv-observability-nodeloss` · pytest `ds-backend-tests`, `av-ci-gates` · benchmark-driven
@@ -779,4 +783,11 @@ decision — keep with a stated basis, or cut from both surfaces (R8).
 
 # 7. RETIRED
 
-*Nothing retired yet. Entries here are kept permanently as an audit trail — see R3 and R5.*
+- **`sn-docker-onboarding`** `retired` Containerized the backend services with Docker, cutting
+  new-developer setup to under 15 minutes.
+  `self-attested` · <15 min onboarding · `haochent_resume_v1.tex`:123 · 2026-08-04 · 96ch/1ln
+  `kw:` Docker · containerization · developer tooling · onboarding · DevOps
+
+  **Retired 2026-08-14:** recovered repository history shows the Dockerfiles and root Compose setup
+  predate the internship and were authored by other contributors; no Haochen-authored Docker change
+  or onboarding-time artifact exists.

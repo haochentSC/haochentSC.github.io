@@ -1,0 +1,197 @@
+%-------------------------
+% Resume in LaTeX
+% Author : Jake Gutierrez (template)
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%
+% Preamble from haochent_resume_v1.tex, with the deliberate deviations documented below.
+% Body from selection.md (Google SWE Early Career, 2026-08-13), rewritten 2026-08-13 for
+% register and formatting against RESUME-WRITING-SYSTEM.md sec 3.2 and sec 4.4.
+%
+% Deviations from the stock template, all formatting-policy driven:
+%  1. Link text is plain \footnotesize, not \underline'd - no underlines anywhere.
+%  2. The name is set in ordinary title case, not \scshape. Small caps renders as flat
+%     ALL CAPS once a viewer substitutes a font that has no true small-cap glyphs.
+%  3. \resumeProjectHeading takes a third argument, the tech-stack line. It is typeset
+%     inside the same \item as the heading so it collects no list glue. Do NOT give the
+%     stack its own \item: a stack list is not an accomplishment, and a bare \item[] also
+%     drags in \itemsep + \parsep, which is what pushed this resume onto a second page.
+%  4. List spacing is set explicitly via enumitem instead of the stock template's stack of
+%     negative \vspace hacks, so the layout is reproducible across engines.
+%
+% Verified with tectonic (XeTeX): 1 page, 0 overfull boxes.
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+% Guarded so the file also compiles under XeTeX/LuaTeX, which have no \pdfgentounicode.
+% Under Overleaf's default pdfLaTeX this behaves exactly as the unguarded original.
+\ifdefined\pdfgentounicode\input{glyphtounicode}\fi
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\ifdefined\pdfgentounicode\pdfgentounicode=1\fi
+
+\newcommand{\resumeItem}[1]{\item\small{#1}}
+
+% The trailing \vspace values here and in \resumeProjectHeading cancel the following list's
+% \topsep. They are tuned against \topsep=2pt below, NOT against the stock 9pt default:
+% restore the stock -7pt and the stack line lands on top of the first bullet.
+\newcommand{\resumeSubheading}[4]{
+  \item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-2pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+% #1 project name (with optional link), #2 dates, #3 tech stack.
+% The stack rides inside this \item on its own line: no bullet, no list glue, and it wraps
+% like ordinary text instead of overflowing the way a tabular row would.
+\newcommand{\resumeProjectHeading}[3]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \small#2 \\
+    \end{tabular*}
+    \par\vspace{-4pt}
+    \noindent{\footnotesize #3}
+    \par\vspace{-2pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% Explicit list spacing. The stock template leaves \topsep/\parsep/\itemsep at their 11pt
+% defaults (~9pt each) and claws the space back with negative \vspace; that is engine- and
+% font-sensitive. Setting them outright is the single knob for overall density: raise
+% itemsep below to loosen the page, lower it to tighten.
+\newcommand{\resumeSubHeadingListStart}{%
+  \begin{itemize}[leftmargin=0.15in, label={}, topsep=2pt, partopsep=0pt, parsep=0pt, itemsep=4pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{%
+  \begin{itemize}[leftmargin=0.25in, topsep=2pt, partopsep=0pt, parsep=0pt, itemsep=1pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-3pt}}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge Haochen Tong} \\ \vspace{1pt}
+    \small 708-548-0314 $|$ \href{mailto:tonghaochen77@gmail.com}{tonghaochen77@gmail.com} $|$ \href{https://linkedin.com/in/haochent}{linkedin.com/in/haochent} $|$ \href{https://github.com/haochentSC}{github.com/haochentSC} $|$ \href{https://haochentsc.github.io}{haochentsc.github.io}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of Illinois Urbana-Champaign}{Urbana, IL}
+      {Master of Computer Science}{Jan 2026 -- Present}
+    \resumeSubheading
+      {University of Southern California}{Los Angeles, CA}
+      {B.S. Computer Science}{Aug 2022 -- Dec 2025}
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+\resumeSubheading
+  {AgentVeris}{\href{https://www.agentveris.com/}{agentveris.com}}
+  {Technical Co-Founder}{Mar 2026 -- Present}
+  \resumeItemListStart
+    \resumeItem{Built a live website scanner that crawls online stores and scores whether AI shopping agents can read the catalog, running its compliance checks through a background job scheduler.}
+    \resumeItem{Developed an AI shopping agent that plans, searches, compares, and adds items to a cart, with 5 tools and a 12-step limit, tested on saved catalogs and live storefronts.}
+    \resumeItem{Implemented Model Context Protocol (MCP) on both sides, checking whether a site speaks MCP and exposing 3 tools AI clients use to run a scan.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Stringer News}{Los Angeles, CA}
+  {Software Engineering Intern}{Aug 2025 -- Dec 2025}
+  \resumeItemListStart
+    \resumeItem{Shipped a Python API that sends personalized email digests to one user or a batch, using SendGrid and PostgreSQL.}
+    \resumeItem{Added auto-save for article drafts, saving only after typing stops and reusing the same draft across saves.}
+    \resumeItem{Implemented API-key authentication on the email endpoints and kept sending after individual recipients failed.}
+  \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+  \resumeSubHeadingListStart
+\resumeProjectHeading
+  {\textbf{Distributed KV Cache for LLM Inference} \href{https://github.com/haochentSC/Distributed-KV-Cache-for-LLM-Inference}{\footnotesize [GitHub]}}
+  {May 2026 -- Jul 2026}
+  {Go, gRPC, etcd, consistent hashing, vLLM, AWS, Terraform, Prometheus}
+  \resumeItemListStart
+    \resumeItem{Built a distributed cache in Go that lets GPU servers reuse prefixes another server already computed, cutting time-to-first-token 10.9\% on 4k-token shared prefixes on AWS.}
+    \resumeItem{Designed a cache eviction policy that lifted overall hit rate from 12.2\% to 14.4\% and the worst-served tenant's from 10.3\% to 12.3\%.}
+    \resumeItem{Ran failure tests on a 3-node AWS cluster with network delay, coordinator outages, and node shutdowns, completing 27,365 requests with no correctness violations.}
+  \resumeItemListEnd
+
+\resumeProjectHeading
+  {\textbf{Deepsick Marketplace} {\footnotesize 4-person course project, private repo}}
+  {Jan 2026 -- May 2026}
+  {Python, FastAPI, MySQL, GCP Cloud SQL, React, pytest}
+  \resumeItemListStart
+    \resumeItem{Designed a SQL query that compares each listing with similar items in the same category, brand, and condition, then labels the price as fair, below, or above the group.}
+    \resumeItem{Wrote 44 of 63 backend tests on password hashing, token tampering, expiry, and SQL sent by each endpoint.}
+  \resumeItemListEnd
+
+\resumeProjectHeading
+  {\textbf{World Models} {\footnotesize paper reproduction, CarRacing-v3} \href{https://github.com/haochentSC/worldModels_CSCI_467}{\footnotesize [GitHub]}}
+  {Aug 2025 -- Dec 2025}
+  {Python, PyTorch, Gymnasium, stable-baselines3, CMA-ES, NumPy}
+  \resumeItemListStart
+    \resumeItem{Diagnosed a vision model that was ignoring its compressed representation and outputting blurry frames, then fixed it by lowering a training penalty and checking frames it had not seen.}
+    \resumeItem{Trained a controller to drive from that compressed representation, reaching a best CarRacing score of 600 and a mean of 285 over 10 evaluation episodes after 500k training steps.}
+  \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------SKILLS-----------
+\section{Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small\item{
+    \textbf{Languages}{:  Python, Go, SQL, TypeScript, Java, C++ (coursework)} \\
+    \textbf{Frameworks and AI}{:  FastAPI, Flask, Celery, React, Next.js, PyTorch, vLLM, Anthropic SDK, MCP} \\
+    \textbf{Data and Systems}{:  PostgreSQL, MySQL, Redis, gRPC, etcd, distributed caching, replication, failover} \\
+    \textbf{Cloud and Tools}{:  AWS, Terraform, Docker, Prometheus, GitHub Actions, pytest}
+  }
+\end{itemize}
+
+\end{document}

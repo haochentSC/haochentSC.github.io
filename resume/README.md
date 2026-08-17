@@ -48,15 +48,21 @@ already sent. Getting this wrong is the whole failure mode this store exists to 
 
 ```
 resume/
-├── README.md            <- you are here
-├── MASTER-RESUME.md     <- §1 rules, then all content. Hand-authored; no build step
-├── evidence/<id>.md     <- append-only verification ledger, one per subject
+├── README.md                  <- you are here
+├── MASTER-RESUME.md           <- §1 rules, then all content. Hand-authored; no build step
+├── RESUME-WRITING-SYSTEM.md   <- craft rules: wording, verbs, layout, ATS + a pre-send checklist
+├── evidence/<id>.md           <- append-only verification ledger, one per subject
 └── applications/
     └── <YYYY-MM-DD>-<company>-<role>/
         ├── jd.md         <- the posting verbatim + a gap analysis
         ├── selection.md  <- which bullets, why, and any R10 condensed forms
         └── resume.tex / resume.html / resume.pdf
 ```
+
+**The two governing documents split cleanly.** `MASTER-RESUME.md` §1 decides *what may be claimed*;
+`RESUME-WRITING-SYSTEM.md` decides *how a permitted claim is worded and laid out*. §1 wins on any
+conflict, and the writing system's §8 already records every known conflict and its resolution — so
+don't re-litigate them. Run its §9 checklist before any resume ships.
 
 `MASTER-RESUME.md` sections: §1 rules · §2 profile · §3 education · §4 experience · §5 projects
 (six) · §6 skills inventory · §7 retired.
@@ -87,9 +93,9 @@ python "C:/Users/tongh/.claude/skills/resume-master/scripts/check.py"
 
 It checks provenance (tier + source + date on every number, no active `disputed` bullet, every
 `estimated` bullet hedges), flags orphan-risk bullet lengths, and diffs every `metrics[]` value in
-`src/content/projects/*.md` against the master. Current state: **72 bullets, 0 errors, 7 warnings**
-(the warnings are cosmetic line-length notes plus one architectural constant on a `code-verified`
-bullet — all reviewed and accepted).
+`src/content/projects/*.md` against the master. Last recorded run: **72 bullets, 0 errors,
+7 warnings** (the warnings are cosmetic line-length notes plus one architectural constant on a
+`code-verified` bullet — all reviewed and accepted).
 
 ### `resume-tailor` — reads the master, writes only into `applications/`
 
@@ -164,13 +170,13 @@ git remote remove resume-store
 
 ---
 
-## Current state (2026-08-09)
+## Current state (updated 2026-08-14)
 
-**72 bullets, 0 errors.** Six projects plus one internship.
+**72 total bullets: 71 active, 1 retired.** Six projects plus one internship.
 
 | Subject | Bullets | Notes |
 |---|---|---|
-| Stringer News (internship) | 8 | All `self-attested` — no repo on this machine |
+| Stringer News (internship) | 7 active, 1 retired | Repo recovered at `C:\Users\tongh\stringer`; email and autosave mechanisms code-verified, two autosave outcomes remain `self-attested` |
 | Distributed KV Cache | 15 | Richest evidence: committed benchmarks, 35 ADRs |
 | AgentVeris | 19 | Live in production; **closed source**, so no independent proof on paper |
 | Deepsick Marketplace | 14 | Team of 4 — attribution resolved by `git blame` |
@@ -181,10 +187,11 @@ Applications sent: one real (`2026-08-07-snowflake-swe-snowconvert-ai`), plus va
 
 ### Open items, all needing Haochen
 
-1. **Stringer News verification.** Five numbers rest on memory alone: 90% draft-loss reduction,
-   <0.5% save-failure rate, ~200 ms, <15 min onboarding, 100-user batch. He has said he will do a
-   pass. Until then they are `self-attested` and an interviewer asking "how did you measure that?"
-   gets no answer.
+1. **Stringer News outcomes.** The recovered repository verifies the email system, 100-user batch
+   default, API-key authentication, per-recipient continuation, and 3-second autosave debounce.
+   It does not verify the 90% draft-loss or <0.5% save-failure outcomes, which remain
+   `self-attested` and stay off current applications. The ~200 ms claim remains rejected, and the
+   Docker onboarding bullet was retired after git history contradicted its attribution.
 2. **Modality-Aware KV Tiering is not cloned.** It is the sixth project and has zero bullets. It
    also blocks the entire RAG skills group — RAG, multimodal RAG, BM25, RRF, CLIP, Qwen3-Omni are
    published on `SkillGrid.astro` with no evidence pointer (§6.1). Cloning it is the largest

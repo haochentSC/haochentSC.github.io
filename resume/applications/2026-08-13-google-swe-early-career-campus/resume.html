@@ -1,0 +1,70 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Haochen Tong — Resume</title>
+<style>
+  /* Mirrors the Jake LaTeX template's geometry so the HTML fallback paginates the same way:
+     letter paper, 0.5in margins, 11pt Computer-Modern-adjacent serif.
+     Formatting policy: bold only on name, section headings, schools, companies, projects and
+     skills labels. No underlines, no decorative italics. See RESUME-WRITING-SYSTEM.md §3.2. */
+  @page { size: letter; margin: 0.5in 0.5in 0.5in 0.5in; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Latin Modern Roman", "Times New Roman", Times, serif;
+    font-size: 11pt; line-height: 1.18; color: #000; margin: 0;
+    -webkit-print-color-adjust: exact;
+  }
+  a { color: #000; text-decoration: none; }
+  header { text-align: center; margin-bottom: 4pt; }
+  /* Title case, not small-caps. Chrome has no true small-cap glyphs for the fallback serif,
+     so it synthesises them by scaling capitals and the name renders as flat ALL CAPS.
+     The .tex drops \scshape for the same reason. */
+  header .name {
+    font-size: 24pt; font-weight: 700;
+    letter-spacing: 0.3pt; line-height: 1.1;
+  }
+  header .contact { font-size: 9.5pt; margin-top: 2pt; }
+  h2 {
+    font-variant: small-caps; font-size: 13pt; font-weight: 400;
+    margin: 7pt 0 1pt; padding-bottom: 1pt; border-bottom: 0.7pt solid #000;
+  }
+  .entry { margin: 4pt 0 0; }
+  .entry-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1em; }
+  .entry-row .left { font-weight: 700; }
+  .entry-row .right { white-space: nowrap; }
+  /* Secondary hierarchy line: job title / dates. Italic here is hierarchy, not decoration. */
+  .entry-row.sub .left, .entry-row.sub .right { font-weight: 400; font-style: italic; font-size: 10pt; }
+  .proj .left b { font-weight: 700; }
+  .proj .left .link { font-weight: 400; font-size: 9.5pt; }
+  /* Tech stack: plain and secondary. Not a bullet, not italic. */
+  .stack { font-size: 9.5pt; margin: 1pt 0 0; }
+  ul { margin: 1pt 0 0; padding-left: 1.5em; }
+  li { font-size: 10pt; margin-bottom: 1.5pt; }
+  .skills { font-size: 10pt; }
+  .skills div { margin-bottom: 1.5pt; }
+</style>
+
+<header>
+  <div class="name">Haochen Tong</div>
+  <div class="contact">708-548-0314 · tonghaochen77@gmail.com · linkedin.com/in/haochent · github.com/haochentSC · haochentsc.github.io</div>
+</header>
+
+<h2>Education</h2>
+<div class="entry"><div class="entry-row"><span class="left">University of Illinois Urbana-Champaign</span><span class="right">Urbana, IL</span></div><div class="entry-row sub"><span class="left">Master of Computer Science</span><span class="right">Jan 2026 – Present</span></div></div>
+<div class="entry"><div class="entry-row"><span class="left">University of Southern California</span><span class="right">Los Angeles, CA</span></div><div class="entry-row sub"><span class="left">B.S. Computer Science</span><span class="right">Aug 2022 – Dec 2025</span></div></div>
+
+<h2>Experience</h2>
+<div class="entry"><div class="entry-row"><span class="left">AgentVeris</span><span class="right"><a href="https://www.agentveris.com/">agentveris.com</a></span></div><div class="entry-row sub"><span class="left">Technical Co-Founder</span><span class="right">Mar 2026 – Present</span></div><ul><li>Built a live website scanner that crawls online stores and scores whether AI shopping agents can read the catalog, running its compliance checks through a background job scheduler.</li><li>Developed an AI shopping agent that plans, searches, compares, and adds items to a cart, with 5 tools and a 12-step limit, tested on saved catalogs and live storefronts.</li><li>Implemented Model Context Protocol (MCP) on both sides, checking whether a site speaks MCP and exposing 3 tools AI clients use to run a scan.</li></ul></div>
+<div class="entry"><div class="entry-row"><span class="left">Stringer News</span><span class="right">Los Angeles, CA</span></div><div class="entry-row sub"><span class="left">Software Engineering Intern</span><span class="right">Aug 2025 – Dec 2025</span></div><ul><li>Shipped a Python API that sends personalized email digests to one user or a batch, using SendGrid and PostgreSQL.</li><li>Added auto-save for article drafts, saving only after typing stops and reusing the same draft across saves.</li><li>Implemented API-key authentication on the email endpoints and kept sending after individual recipients failed.</li></ul></div>
+
+<h2>Projects</h2>
+<div class="entry proj"><div class="entry-row"><span class="left"><b>Distributed KV Cache for LLM Inference</b> <a class="link" href="https://github.com/haochentSC/Distributed-KV-Cache-for-LLM-Inference">[GitHub]</a></span><span class="right">May 2026 – Jul 2026</span></div><div class="stack">Go, gRPC, etcd, consistent hashing, vLLM, AWS, Terraform, Prometheus</div><ul><li>Built a distributed cache in Go that lets GPU servers reuse prefixes another server already computed, cutting time-to-first-token 10.9% on 4k-token shared prefixes on AWS.</li><li>Designed a cache eviction policy that lifted overall hit rate from 12.2% to 14.4% and the worst-served tenant's from 10.3% to 12.3%.</li><li>Ran failure tests on a 3-node AWS cluster with network delay, coordinator outages, and node shutdowns, completing 27,365 requests with no correctness violations.</li></ul></div>
+<div class="entry proj"><div class="entry-row"><span class="left"><b>Deepsick Marketplace</b> <span class="link">4-person course project, private repo</span></span><span class="right">Jan 2026 &ndash; May 2026</span></div><div class="stack">Python, FastAPI, MySQL, GCP Cloud SQL, React, pytest</div><ul><li>Designed a SQL query that compares each listing with similar items in the same category, brand, and condition, then labels the price as fair, below, or above the group.</li><li>Wrote 44 of 63 backend tests on password hashing, token tampering, expiry, and SQL sent by each endpoint.</li></ul></div>
+<div class="entry proj"><div class="entry-row"><span class="left"><b>World Models</b> <span class="link">paper reproduction, CarRacing-v3</span> <a class="link" href="https://github.com/haochentSC/worldModels_CSCI_467">[GitHub]</a></span><span class="right">Aug 2025 – Dec 2025</span></div><div class="stack">Python, PyTorch, Gymnasium, stable-baselines3, CMA-ES, NumPy</div><ul><li>Diagnosed a vision model that was ignoring its compressed representation and outputting blurry frames, then fixed it by lowering a training penalty and checking frames it had not seen.</li><li>Trained a controller to drive from that compressed representation, reaching a best CarRacing score of 600 and a mean of 285 over 10 evaluation episodes after 500k training steps.</li></ul></div>
+
+<h2>Skills</h2>
+<div class="skills">
+<div><b>Languages</b>: Python, Go, SQL, TypeScript, Java, C++ (coursework)</div>
+<div><b>Frameworks and AI</b>: FastAPI, Flask, Celery, React, Next.js, PyTorch, vLLM, Anthropic SDK, MCP</div>
+<div><b>Data and Systems</b>: PostgreSQL, MySQL, Redis, gRPC, etcd, distributed caching, replication, failover</div>
+<div><b>Cloud and Tools</b>: AWS, Terraform, Docker, Prometheus, GitHub Actions, pytest</div>
+</div>

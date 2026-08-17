@@ -93,7 +93,7 @@
 \end{center}
 
 \vspace{-6pt}
-\small MCS student at UIUC with production SWE internship experience and self-directed work in agentic AI and distributed systems. Builds async Python and Go backends, LLM agents, and the evaluation harnesses that measure whether they actually work.
+\small MCS student at UIUC with a production SWE internship and self-directed projects in LLM agents and distributed systems. Builds async backends in Python and Go --- LLM agents on the Anthropic SDK, a distributed KV cache in Go, and the evaluation harnesses that measure agent reliability.
 \vspace{2pt}
 
 %-----------EDUCATION-----------
@@ -115,7 +115,7 @@
   {Stringer News}{Los Angeles, CA}
   \resumeItemListStart
     \resumeItem{Shipped a Flask Blueprint exposing REST endpoints for single-user and batch email digest dispatch, integrating SendGrid templates, PostgreSQL JSONB queries, and Redis-backed idempotency.}
-    \resumeItem{Built a recommendation enrichment layer joining cached JSONB data with batch event lookups through PostgreSQL array queries, enabling batch sends of 100 users per request.}
+    \resumeItem{Engineered a recommendation enrichment layer joining cached JSONB data with batch event lookups through PostgreSQL array queries, enabling batch sends of 100 users per request.}
     \resumeItem{Implemented decorator-based API-key authentication and structured 4xx/5xx error handling with per-user isolation, so a single failing recipient could not abort an in-flight batch.}
   \resumeItemListEnd
   \resumeSubHeadingListEnd
@@ -124,17 +124,16 @@
 \section{Technical Projects}
   \resumeSubHeadingListStart
 \resumeProjectHeading
-  {\textbf{AgentVeris --- Agentic Commerce Compliance Scanner} \href{https://www.agentveris.com/}{\scriptsize(www.agentveris.com)}}{}
+  {\textbf{AgentVeris --- Agentic Commerce Compliance Scanner} \href{https://www.agentveris.com/}{\scriptsize(www.agentveris.com)}}{Mar 2026 -- Present}
   \resumeItemListStart
     \resumeItem{\emph{Python 3.12, FastAPI, Celery, PostgreSQL 16, Redis 7, SQLAlchemy/Alembic $\cdot$}}
     \resumeItem{Built an LLM shopping agent on the Anthropic SDK over a small 5-tool surface with a 12-iteration cap, behind an adapter whose frozen-fixture and live-site implementations run identical agent code.}
-    \resumeItem{Built an agent evaluation harness with a 6-class failure taxonomy and 9 graded cases, where a programmatic oracle owns every computable verdict and an LLM judge owns only the subjective slice.}
+    \resumeItem{Designed an agent evaluation harness with a 6-class failure taxonomy and 9 graded cases, where a programmatic oracle owns every computable verdict and an LLM judge owns only the subjective slice.}
     \resumeItem{Gated merges on agent reliability, not tests alone: CI re-runs the 9-case suite and fails the PR if any of 4 metrics drops below a committed baseline, proved by injecting a regression it must reject.}
-    \resumeItem{Built the asynchronous pipeline behind a live SaaS: FastAPI submits and returns immediately, a Celery worker across 4 queues runs 8 check modules under per-check fault isolation, then crawls before scoring.}
   \resumeItemListEnd
 
 \resumeProjectHeading
-  {\textbf{Distributed KV Cache for LLM Inference} \href{https://github.com/haochentSC/Distributed-KV-Cache-for-LLM-Inference}{\scriptsize(github.com/haochentSC/Distributed-KV-Cache-for-LLM-Inference)}}{May 2026 -- Jun 2026}
+  {\textbf{Distributed KV Cache for LLM Inference} \href{https://github.com/haochentSC/Distributed-KV-Cache-for-LLM-Inference}{\scriptsize(github.com/haochentSC/Distributed-KV-Cache-for-LLM-Inference)}}{May 2026 -- Jul 2026}
   \resumeItemListStart
     \resumeItem{\emph{Go, gRPC/Protobuf, etcd, consistent hashing, vLLM, AWS, Terraform, Prometheus}}
     \resumeItem{Built a distributed KV cache in Go --- consistent-hash sharding, RF=2 async replication, etcd-coordinated failover --- cutting time-to-first-token 10.9\% on 4k-token shared prefixes, measured cross-AZ on AWS.}
@@ -142,11 +141,12 @@
   \resumeItemListEnd
 
 \resumeProjectHeading
-  {\textbf{Deepsick Marketplace --- Second-Hand Marketplace with Fair-Price Analytics} \href{https://github.com/cs411-alawini/sp26-cs411-team038-Deepsick (course org, private)}{\scriptsize(github.com/cs411-alawini/sp26-cs411-team038-Deepsick (course org, private))}}{Jan 2026 -- Apr 2026}
+  {\textbf{Deepsick Marketplace --- Second-Hand Marketplace with Fair-Price Analytics} {\scriptsize(course project $\cdot$ private repo)}}{Jan 2026 -- May 2026}
   \resumeItemListStart
-    \resumeItem{\emph{Python, FastAPI, MySQL 8, GCP Cloud SQL, React 19, Vite, PBKDF2, HMAC, pytest}}
-    \resumeItem{Built a stored procedure moving the contact-seller flow into MySQL: JOINs validate the listing and participants, four SIGNAL SQLSTATE guards return descriptive errors, a GROUP BY caps open threads.}
-    \resumeItem{Built the fair-price analytics query: a two-stage CTE gathering a listing's peer group on null-safe matches across category, brand and condition, scored against a $\pm$20\% band.}
+    \resumeItem{\emph{Python, FastAPI, MySQL 8, GCP Cloud SQL, React 19, Vite, pytest}}
+    \resumeItem{Built the fair-price analytics query --- the product's core differentiator: a two-stage CTE that gathers a listing's peer group on null-safe matches across category, brand and condition, returning a fair / below / above verdict against a $\pm$20\% band.}
+    \resumeItem{Wrote a stored procedure moving the contact-seller flow into MySQL: JOINs validate the listing and participants, four SIGNAL SQLSTATE guards return descriptive errors, a GROUP BY caps open threads.}
+    \resumeItem{Built the marketplace's login and session authentication from scratch with no auth framework --- PBKDF2 password hashing and signed session tokens.}
   \resumeItemListEnd
   \resumeSubHeadingListEnd
 
@@ -155,11 +155,9 @@
 \begin{itemize}[leftmargin=0.15in, label={}]
   \small\item{
     \textbf{Languages}{:  Python, Go, SQL, TypeScript} \\
-    \textbf{Agentic AI \& LLM}{:  Anthropic SDK, LLM agents, tool use, MCP (FastMCP), LLM-as-judge evaluation, vLLM, KV caching} \\
-    \textbf{Backend \& APIs}{:  FastAPI, Flask, REST API design, Celery, async/await, gRPC/Protobuf, authentication} \\
-    \textbf{Distributed Systems}{:  etcd, consistent hashing, replication \& failover, chaos engineering, correctness oracles} \\
-    \textbf{Data \& Storage}{:  PostgreSQL, MySQL, stored procedures, triggers, transactions, CTEs, Redis, JSONB, Alembic} \\
-    \textbf{Infra, CI \& Testing}{:  Docker, AWS, Terraform, GCP/Cloud SQL, Railway, Vercel, GitHub Actions, pytest}
+    \textbf{AI \& Backend}{:  Anthropic SDK, LLM agents and eval harnesses, MCP, FastAPI/Flask, REST \& gRPC, Celery, authentication} \\
+    \textbf{Data \& Databases}{:  PostgreSQL, MySQL, stored procedures, transactions, CTEs, Redis, JSONB} \\
+    \textbf{Systems \& Infra}{:  distributed systems, etcd, chaos engineering, AWS, Terraform, GCP, Docker, pytest}
   }
 \end{itemize}
 

@@ -1,10 +1,9 @@
 ---
 // Experience section. Content sourced from the master resume (strongest bullets only).
 const bullets = [
-  'Shipped a Flask Blueprint with REST endpoints for single-user and batch email digest dispatch — SendGrid dynamic templates, PostgreSQL JSONB recommendation queries, and Redis-backed idempotency powering a production email pipeline.',
-  'Built a recommendation enrichment layer joining cached JSONB recommendations with batch event lookups via PostgreSQL array queries, enabling 100-user batch sends per request.',
-  'Engineered debounced auto-save with optimistic UI and sync conflict resolution — cut draft-loss by 90%, save-failure rate to <0.5%, and perceived latency by ~200 ms.',
-  'Containerized backend services with Docker, cutting new-developer onboarding to <15 minutes.',
+  'Shipped single-user and batch Flask endpoints for personalized email digests using SendGrid dynamic templates and PostgreSQL recommendations.',
+  'Built recommendation enrichment that joins cached JSONB data to event details through a PostgreSQL array query, with dispatch defaulting to 100 opted-in users.',
+  'Added debounced auto-save for article drafts, preserving draft IDs across saves and triggering only on document edits.',
 ];
 ---
 

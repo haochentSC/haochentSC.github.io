@@ -18,3 +18,7 @@ Thumbs.db
 # notes, and internals of a closed-source project.
 # Nothing under resume/ reaches the built site — Astro builds src/ and public/ only, and
 # the Pages workflow uploads dist/. Tracking it here does not publish it to the website.
+
+# Local Stringer evidence export contains plaintext credentials. The verified, redacted findings
+# are recorded in resume/evidence/stringer-news.md; never commit the binary source.
+resume/evidence/Email Notification System Documentation.docx

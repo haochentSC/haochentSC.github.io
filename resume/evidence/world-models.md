@@ -62,3 +62,31 @@ with stable latent variance" also needs an artifact or it becomes `self-attested
 
 **Verifier:** Claude (recomputation) â€” pending Haochen's confirmation before the bullet leaves
 `draft`.
+
+---
+
+## 2026-08-17 — Best-episode score 600 sourced; mean 285 artifact corrected
+
+**Claim under test:** portfolio best episode **600** and mean **285 ± 195** (frontmatter + body).
+Google resume was leading with mean 285 only; Haochen asked to lead with the best-episode figure.
+
+**Artifact:** `checkpoints/ppo_results.json`@`7a8bd85`
+
+| Field | Value |
+|---|---|
+| `max(rewards)` | **599.7098…** ? reported **600** (nearest integer; not inflated from below .5) |
+| `mean_reward` | **284.7075…** ? **285** |
+| `std_reward` | **195.4408…** ? **±195** |
+| `timesteps` | 500,000 |
+| n episodes | 10 |
+
+**Source correction:** `wm-ppo-latent-control` previously cited `docs/images/final_scores.png`.
+The JSON is the authoritative measured source (same run that produced the mean-285 claim).
+`docs/demo_results.json` remains a *second* independent 10-episode run (mean 207.6, best 398)
+and continues to back `wm-eval-variance` — do not conflate the two runs' best episodes.
+
+**Master update:** `wm-ppo-latent-control` now carries best 600 + mean 285; verification date
+2026-08-17. Google application condensed form leads with best 600.
+
+**Verifier:** direct read of committed JSON; Haochen confirmed use of the best-episode figure
+("this one go").
